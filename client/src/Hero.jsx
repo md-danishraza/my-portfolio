@@ -1,18 +1,11 @@
 import React from "react";
 import profile from "./assets/profile.jpg";
-import useScrollReveal from "./utils/useScrollReveal";
+
 import ProfileImage from "./components/ProfileImg";
 import { FaGithub, FaLinkedin, FaInstagram, FaArrowDown } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
 function Hero() {
-  useScrollReveal(".hero-content .info", { origin: "left", delay: 200 });
-  useScrollReveal(".hero-content .image-wrapper", {
-    origin: "right",
-    delay: 400,
-  });
-  useScrollReveal(".hero-cta", { origin: "bottom", delay: 600 });
-
   const socialLinks = [
     {
       icon: <FaGithub />,
