@@ -1,20 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaGithubSquare } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaInstagramSquare } from "react-icons/fa";
 import { FaTimes, FaBars } from "react-icons/fa";
-import Theme from "../Theme";
+import Theme from "./Theme";
 
 function Navbar() {
   const [menu, setMenu] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <div className="navbar">
+    <div className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}>
       <div className="links">
         <a
           href="https://github.com/md-danishraza"
           title="github"
           target="_blank"
+          rel="noopener noreferrer"
         >
           <FaGithubSquare className="icon" />
         </a>
@@ -22,6 +32,7 @@ function Navbar() {
           href="https://www.linkedin.com/in/md-danish-raza-2039b5276/"
           title="linkedin"
           target="_blank"
+          rel="noopener noreferrer"
         >
           <FaLinkedin className="icon" />
         </a>
@@ -29,26 +40,33 @@ function Navbar() {
           href="https://www.instagram.com/renderstic/"
           title="instagram"
           target="_blank"
+          rel="noopener noreferrer"
         >
           <FaInstagramSquare className="icon" />
         </a>
       </div>
+
       <div className={menu ? "navigations active" : "navigations"}>
         <a href="#" className="navlinks" onClick={() => setMenu(false)}>
           Home
         </a>
         <a href="#projects" className="navlinks" onClick={() => setMenu(false)}>
-          Project
+          Projects
         </a>
         <a href="#contact" className="navlinks" onClick={() => setMenu(false)}>
           Contact
         </a>
       </div>
+
       <div className="menu-theme">
         <Theme />
-        <span className="menu" onClick={() => setMenu(!menu)}>
+        <button
+          className="menu-toggle"
+          onClick={() => setMenu(!menu)}
+          aria-label="Toggle menu"
+        >
           {menu ? <FaTimes /> : <FaBars />}
-        </span>
+        </button>
       </div>
     </div>
   );

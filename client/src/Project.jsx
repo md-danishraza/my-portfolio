@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import useFetchProjects from "./useFetchProjects";
-import Item from "./Item";
+import useFetchProjects from "./hooks/useFetchProjects";
+import Item from "./components/Item";
 import useScrollReveal from "./utils/useScrollReveal";
 
 function Project() {
   const { loading, projects } = useFetchProjects();
   const [visibleCount, setVisibleCount] = useState(6);
+  const [activeFilter, setActiveFilter] = useState("All");
 
   const menus = [
     { stack: "All", status: false },
@@ -15,6 +16,7 @@ function Project() {
     { stack: "Next", status: false },
     { stack: "FullStack", status: false },
   ];
+
   const [menu, setMenu] = useState(menus);
 
   useEffect(() => {
@@ -26,11 +28,15 @@ function Project() {
   }, []);
 
   const handleMenu = (menuItem) => {
+    setActiveFilter(menuItem.stack);
     setMenu(
       menus.map((item) =>
-        item.stack === menuItem.stack ? { ...item, status: true } : item
+        item.stack === menuItem.stack
+          ? { ...item, status: true }
+          : { ...item, status: false }
       )
     );
+    setVisibleCount(6); // Reset visible count when filtering
   };
 
   const handleLoadMore = () => {
@@ -85,47 +91,87 @@ function Project() {
 
   return (
     <div className="project-section" id="projects">
-      <h1>PROJECTS</h1>
-      <p>Resourced using CMS</p>
-      <div className="menus">
-        {menu.map((menuItem, i) => (
-          <button
-            key={i}
-            onClick={() => handleMenu(menuItem)}
-            className={menuItem.status ? "active" : undefined}
-          >
-            {menuItem.stack}
-          </button>
-        ))}
-      </div>
-      {loading ? (
-        <div className="loading"></div>
-      ) : (
-        <div className="projects">
-          {filteredProjects
-            .reverse()
-            .slice(0, visibleCount)
-            .map((project, i) => (
-              <Item key={i} project={project.fields} />
-            ))}
+      <div className="project-container">
+        <div className="section-header">
+          <h1 className="section-title">
+            <span className="title-highlight">My</span> Projects
+          </h1>
+          <p className="section-subtitle">
+            Resourced using CMS • Showcasing my best work
+          </p>
         </div>
-      )}
-      {!loading && (
-        <div className="pagination-buttons">
-          {filteredProjects.length > visibleCount && menus.length >= 6 && (
-            <button onClick={handleLoadMore} className="load-more">
-              Load More
-            </button>
-          )}
-          {visibleCount >= filteredProjects.length &&
-            filteredProjects.length > 6 &&
-            menus.length >= 6 && (
-              <button onClick={handleCollapse} className="collapse">
-                Collapse
+
+        <div className="filter-wrapper">
+          <div className="menus">
+            {menu.map((menuItem, i) => (
+              <button
+                key={i}
+                onClick={() => handleMenu(menuItem)}
+                className={`filter-btn ${menuItem.status ? "active" : ""}`}
+              >
+                {menuItem.stack}
+                {menuItem.status && <span className="active-indicator"></span>}
               </button>
-            )}
+            ))}
+          </div>
         </div>
-      )}
+
+        {loading ? (
+          <div className="loading-container">
+            <div className="loading-spinner"></div>
+            <p>Fetching projects...</p>
+          </div>
+        ) : (
+          <>
+            <div className="projects-grid">
+              {filteredProjects
+                .reverse()
+                .slice(0, visibleCount)
+                .map((project, i) => (
+                  <Item key={i} project={project.fields} index={i} />
+                ))}
+            </div>
+
+            {!loading && filteredProjects.length > 0 && (
+              <div className="pagination-wrapper">
+                <div className="pagination-buttons">
+                  {filteredProjects.length > visibleCount && (
+                    <button onClick={handleLoadMore} className="load-more">
+                      <span>Load More</span>
+                      <svg
+                        className="arrow-icon"
+                        viewBox="0 0 24 24"
+                        width="20"
+                        height="20"
+                      >
+                        <path d="M7 10l5 5 5-5H7z" fill="currentColor" />
+                      </svg>
+                    </button>
+                  )}
+                  {visibleCount >= filteredProjects.length &&
+                    filteredProjects.length > 6 && (
+                      <button onClick={handleCollapse} className="collapse">
+                        <span>Collapse</span>
+                        <svg
+                          className="arrow-icon"
+                          viewBox="0 0 24 24"
+                          width="20"
+                          height="20"
+                        >
+                          <path d="M7 14l5-5 5 5H7z" fill="currentColor" />
+                        </svg>
+                      </button>
+                    )}
+                </div>
+                <div className="projects-count">
+                  Showing {Math.min(visibleCount, filteredProjects.length)} of{" "}
+                  {filteredProjects.length} projects
+                </div>
+              </div>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 }

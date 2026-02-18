@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { IoInvertMode } from "react-icons/io5";
-import { IoInvertModeOutline } from "react-icons/io5";
+
 function Theme() {
   const [isDarkTheme, setDarkTheme] = useState(() => {
     // initializing the state with local storage
