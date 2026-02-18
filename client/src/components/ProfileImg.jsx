@@ -8,6 +8,10 @@ const ProfileImage = memo(({ profile }) => (
     width="250"
     height="250"
     // preserveAspectRatio="xMidYMid slice"
+    style={{
+      transform: "scale(1.5) translateY(20px) translateX(5px)", // Adjust this value to zoom in/out
+      transformOrigin: "center",
+    }}
   />
 ));
 
