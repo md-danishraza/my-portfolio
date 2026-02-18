@@ -48,13 +48,13 @@ function Navbar() {
 
       <div className={menu ? "navigations active" : "navigations"}>
         <a href="#" className="navlinks" onClick={() => setMenu(false)}>
-          Home
+          HOME
         </a>
         <a href="#projects" className="navlinks" onClick={() => setMenu(false)}>
-          Projects
+          PROJECTS
         </a>
         <a href="#contact" className="navlinks" onClick={() => setMenu(false)}>
-          Contact
+          CONTACT
         </a>
       </div>
 

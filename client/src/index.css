@@ -2302,7 +2302,7 @@ body.dark .tech-tag {
 }
 
 /* ===== SCROLL REVEAL ANIMATION ===== */
-.footer-content {
+/* .footer-content {
   opacity: 0;
   transform: translateY(30px);
   transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
@@ -2311,7 +2311,7 @@ body.dark .tech-tag {
 .footer-content.revealed {
   opacity: 1;
   transform: translateY(0);
-}
+} */
 
 /* ===== ADD THIS TO YOUR INDEX.CSS OR GLOBAL STYLES ===== */
 /* Smooth scrolling for back to top */
