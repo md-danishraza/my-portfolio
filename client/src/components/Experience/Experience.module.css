@@ -1,0 +1,584 @@
+/* Experience.module.css */
+
+.section {
+    padding: 6rem 2rem;
+    position: relative;
+    background: var(--c2);
+    overflow: hidden;
+  }
+  
+  .section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--highlight), transparent);
+  }
+  
+  .section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--highlight), transparent);
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+  
+  /* Header Styles */
+  .header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  
+  .title {
+    font-family: var(--main-font);
+    font-size: clamp(1rem, 4vw, 4rem);
+    font-weight: 800;
+    color: var(--main-color);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  .titleIcon {
+    color: var(--highlight);
+    animation: spin 10s linear infinite;
+  }
+  
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  .titleHighlight {
+    color: var(--highlight);
+    position: relative;
+  }
+  
+  .titleHighlight::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: var(--highlight);
+    opacity: 0.3;
+    border-radius: 4px;
+    z-index: -1;
+  }
+  
+  .subtitle {
+    color: var(--main-color);
+    opacity: 0.8;
+    font-family: var(--second-font);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+  
+  /* Filter Buttons */
+  .filterContainer {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .filterButton {
+    padding: 0.6rem 1.5rem;
+    background: transparent;
+    border: 2px solid var(--border-color);
+    border-radius: 30px;
+    color: var(--main-color);
+    font-family: var(--second-font);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: capitalize;
+  }
+  
+  .filterButton:hover {
+    border-color: var(--highlight);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 255, 136, 0.2);
+  }
+  
+  .activeFilter {
+    background: var(--highlight);
+    border-color: var(--highlight);
+    color: var(--c1);
+    box-shadow: 0 0 20px var(--highlight);
+  }
+  
+  /* Timeline */
+  .timeline {
+    position: relative;
+    padding: 2rem 0;
+  }
+  
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, 
+      transparent,
+      var(--highlight),
+      var(--highlight),
+      transparent
+    );
+    opacity: 0.3;
+  }
+  
+  .timelineItem {
+    position: relative;
+    margin-bottom: 4rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .timelineItem:last-child {
+    margin-bottom: 0;
+  }
+  
+  /* Timeline Dot */
+  .timelineDot {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 50px;
+    background: var(--c3);
+    border: 3px solid var(--dot-color, var(--highlight));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    box-shadow: 0 0 20px var(--dot-color, var(--highlight));
+    transition: all 0.3s ease;
+  }
+  
+  .timelineItem:hover .timelineDot {
+    transform: translateX(-50%) scale(1.1);
+    box-shadow: 0 0 30px var(--dot-color, var(--highlight));
+  }
+  
+  .dotIcon {
+    font-size: 1.5rem;
+    animation: bounce 2s infinite;
+  }
+  
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+  }
+  
+  /* Content Card */
+  .contentCard {
+    width: 45%;
+    background: var(--c3);
+    border-radius: 20px;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .timelineItem.left .contentCard {
+    margin-right: auto;
+    transform: translateX(-20px);
+  }
+  
+  .timelineItem.right .contentCard {
+    margin-left: auto;
+    transform: translateX(20px);
+  }
+  
+  .contentCard:hover {
+    transform: scale(1.02) translateY(-5px);
+    border-color: var(--card-accent, var(--highlight));
+    box-shadow: 0 20px 40px -15px var(--card-accent, var(--highlight));
+  }
+  
+  .contentCard.expanded {
+    border-color: var(--card-accent, var(--highlight));
+    box-shadow: 0 20px 40px -15px var(--card-accent, var(--highlight));
+  }
+  
+  /* Card Header */
+  .cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    cursor: pointer;
+  }
+  
+  .headerLeft {
+    flex: 1;
+  }
+  
+  .jobTitle {
+    font-family: var(--main-font);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--main-color);
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+  }
+  
+  .contentCard:hover .jobTitle {
+    color: var(--card-accent, var(--highlight));
+  }
+  
+  .companyInfo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--main-color);
+    opacity: 0.8;
+    font-family: var(--second-font);
+    font-size: 0.95rem;
+  }
+  
+  .infoIcon {
+    color: var(--card-accent, var(--highlight));
+    font-size: 1rem;
+  }
+  
+  .expandIcon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--c2);
+    border: 2px solid var(--card-accent, var(--highlight));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--card-accent, var(--highlight));
+    transition: all 0.3s ease;
+  }
+  
+  .contentCard:hover .expandIcon {
+    background: var(--card-accent, var(--highlight));
+    color: var(--c1);
+    transform: rotate(90deg);
+  }
+  
+  /* Job Meta Info */
+  .jobMeta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .metaItem {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: var(--second-font);
+    font-size: 0.85rem;
+    color: var(--main-color);
+    opacity: 0.7;
+  }
+  
+  .metaIcon {
+    color: var(--card-accent, var(--highlight));
+    font-size: 0.9rem;
+  }
+  
+  .jobType {
+    background: var(--c2);
+    padding: 0.2rem 0.8rem;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+  }
+  
+  /* Achievements */
+  .achievements {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+  }
+  
+  .achievements.show {
+    max-height: 500px;
+  }
+  
+  .achievementsList {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+  }
+  
+  .achievementItem {
+    display: flex;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
+    font-family: var(--second-font);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--main-color);
+    opacity: 0.8;
+  }
+  
+  .bulletPoint {
+    color: var(--card-accent, var(--highlight));
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  
+  /* Tech Stack */
+  .techStack {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .techIcon {
+    color: var(--card-accent, var(--highlight));
+    font-size: 1.2rem;
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+  }
+  
+  .techTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .techTag {
+    padding: 0.3rem 0.8rem;
+    background: var(--c2);
+    border-radius: 20px;
+    font-family: var(--second-font);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: white;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+  }
+  
+  .techTag:hover {
+    transform: translateY(-2px) scale(1.05);
+    filter: brightness(1.2);
+    box-shadow: 0 5px 15px currentColor;
+  }
+  
+  /* Year Badge */
+  .yearBadge {
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    background: var(--card-accent, var(--highlight));
+    color: var(--c1);
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-family: var(--main-font);
+    font-size: 0.8rem;
+    font-weight: 600;
+    box-shadow: 0 5px 15px var(--card-accent, var(--highlight));
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+  }
+  
+  .contentCard:hover .yearBadge {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* View More Link */
+  .viewMore {
+    text-align: center;
+    margin-top: 4rem;
+  }
+  
+  .viewMoreLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 2.5rem;
+    background: transparent;
+    border: 2px solid var(--highlight);
+    border-radius: 50px;
+    color: var(--main-color);
+    font-family: var(--main-font);
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  .viewMoreLink::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: var(--highlight);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+    z-index: -1;
+    opacity: 0.2;
+  }
+  
+  .viewMoreLink:hover {
+    color: var(--c1);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 255, 136, 0.3);
+  }
+  
+  .viewMoreLink:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .linkArrow {
+    transition: transform 0.3s ease;
+  }
+  
+  .viewMoreLink:hover .linkArrow {
+    transform: translateX(5px);
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 968px) {
+    .timeline::before {
+      left: 30px;
+    }
+  
+    .timelineDot {
+      left: 30px;
+    }
+  
+    .timelineItem.left .contentCard,
+    .timelineItem.right .contentCard {
+      width: calc(100% - 80px);
+      margin-left: 80px;
+      transform: translateX(0);
+    }
+  
+    .jobMeta {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .section {
+      padding: 4rem 1rem;
+    }
+  
+   .subtitle{
+    font-size: 1rem;
+   }
+  
+    .filterContainer {
+      gap: 0.5rem;
+    }
+  
+    .filterButton {
+      padding: 0.4rem 1rem;
+      font-size: 0.8rem;
+    }
+  
+    .contentCard {
+      padding: 1.2rem;
+    }
+  
+    .jobTitle {
+      font-size: 1.1rem;
+    }
+  
+    .companyInfo {
+      font-size: 0.85rem;
+    }
+  
+    .achievementItem {
+      font-size: 0.85rem;
+    }
+  
+    .techTag {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+    }
+  
+    .viewMoreLink {
+      padding: 0.8rem 2rem;
+      font-size: 0.9rem;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .timelineDot {
+      width: 40px;
+      height: 40px;
+    }
+  
+    .dotIcon {
+      font-size: 1.2rem;
+    }
+  
+    .contentCard {
+      width: calc(100% - 60px);
+      margin-left: 60px;
+    }
+  
+    .jobMeta {
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+  
+    .techStack {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+  
+  /* Dark theme adjustments */
+  body.dark .contentCard {
+    background: rgba(21, 21, 21, 0.95);
+  }
+  
+  body.dark .filterButton {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  body.dark .jobType {
+    background: rgba(0, 0, 0, 0.3);
+  }

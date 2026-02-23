@@ -1,0 +1,1408 @@
+/* GitHubStats.module.css */
+
+.section {
+    padding: 6rem 2rem;
+    position: relative;
+    background: var(--c2);
+    overflow: hidden;
+  }
+  
+  .section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--highlight), transparent);
+  }
+  
+  .section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--highlight), transparent);
+  }
+  
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+  
+  /* Header Styles */
+  .header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .title {
+    font-family: var(--main-font);
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 800;
+    color: var(--main-color);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  .titleIcon {
+    color: var(--highlight);
+    animation: spin 10s linear infinite;
+  }
+  
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  .titleHighlight {
+    color: var(--highlight);
+    position: relative;
+  }
+  
+  .titleHighlight::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: var(--highlight);
+    opacity: 0.3;
+    border-radius: 4px;
+    z-index: -1;
+  }
+  
+  .subtitle {
+    color: var(--main-color);
+    opacity: 0.8;
+    font-family: var(--second-font);
+    font-size: 1.1rem;
+  }
+  
+  /* Profile Card */
+  .profileCard {
+    background: var(--c3);
+    border-radius: 30px;
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    margin-bottom: 2rem;
+  }
+  
+  .profileLeft {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid var(--highlight);
+    object-fit: cover;
+  }
+  
+  .profileInfo {
+    flex: 1;
+  }
+  
+  .profileName {
+    font-family: var(--main-font);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--main-color);
+    margin-bottom: 0.5rem;
+  }
+  
+  .profileBio {
+    font-family: var(--second-font);
+    color: var(--main-color);
+    opacity: 0.7;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+  
+  .profileDetails {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .detailItem, .detailLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: var(--second-font);
+    font-size: 0.9rem;
+    color: var(--main-color);
+    opacity: 0.7;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .detailLink:hover {
+    color: var(--highlight);
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+  
+  /* Stats Grid */
+  .statsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+  
+  .statCard {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--c2);
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+  }
+  
+  .statCard:hover {
+    transform: translateY(-5px);
+    border-color: var(--highlight);
+    box-shadow: 0 10px 20px -10px rgba(0, 255, 136, 0.3);
+  }
+  
+  .statIcon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: var(--c3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--highlight);
+    transition: all 0.3s ease;
+  }
+  
+  .statCard:hover .statIcon {
+    transform: scale(1.1);
+    color: var(--c1);
+    background: var(--highlight);
+  }
+  
+  .statContent {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .statValue {
+    font-family: var(--main-font);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--main-color);
+    line-height: 1;
+  }
+  
+  .statLabel {
+    font-family: var(--second-font);
+    font-size: 0.8rem;
+    color: var(--main-color);
+    opacity: 0.6;
+  }
+  
+  /* Tabs Navigation */
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .tabButton {
+    padding: 0.8rem 2rem;
+    background: transparent;
+    border: 2px solid var(--border-color);
+    border-radius: 50px;
+    color: var(--main-color);
+    font-family: var(--main-font);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    @media (max-width: 768px) {
+        font-size: 0.5rem;
+        padding: 0.4rem 1rem;
+      }
+  }
+  
+  .tabButton::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: var(--highlight);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+    z-index: -1;
+    opacity: 0.2;
+  }
+  
+  .tabButton:hover {
+    border-color: var(--highlight);
+    transform: translateY(-2px);
+  }
+  
+  .tabButton:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .activeTab {
+    background: var(--highlight);
+    border-color: var(--highlight);
+    color: var(--c1);
+    box-shadow: 0 0 20px var(--highlight);
+  }
+  
+  /* Tab Content */
+  .tabContent {
+    min-height: 400px;
+  }
+  
+  /* Graph Card */
+  .graphCard {
+    background: var(--c3);
+    border-radius: 20px;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+  }
+  
+  .graphHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .graphTitle {
+    font-family: var(--main-font);
+    font-size: 1.2rem;
+    color: var(--main-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .graphLegend {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--second-font);
+    font-size: 0.8rem;
+    color: var(--main-color);
+    opacity: 0.7;
+  }
+  
+  .legendColors {
+    display: flex;
+    gap: 2px;
+  }
+  
+  .legendColor {
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+  }
+  
+  /* Contribution Graph */
+  .contributionGraph {
+    overflow-x: auto;
+    padding-bottom: 1rem;
+  }
+  
+  .graphMonths {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 0.5rem;
+    padding-left: 30px;
+  }
+  
+  .monthLabel {
+    font-family: var(--second-font);
+    font-size: 0.8rem;
+    color: var(--main-color);
+    opacity: 0.6;
+  }
+  
+  .graphGrid {
+    display: flex;
+    gap: 3px;
+  }
+  
+  .weekColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  
+  .commitCell {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    transition: transform 0.2s ease;
+  }
+  
+  .commitCell:hover {
+    transform: scale(1.5);
+    z-index: 10;
+  }
+  
+  /* Repos Card */
+  .reposCard {
+    background: var(--c3);
+    border-radius: 20px;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+  }
+  
+  .reposTitle {
+    font-family: var(--main-font);
+    font-size: 1.2rem;
+    color: var(--main-color);
+    margin-bottom: 1.5rem;
+  }
+  
+  .reposList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .repoItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: var(--c2);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .repoItem:hover {
+    transform: translateX(5px);
+    border-color: var(--highlight);
+    box-shadow: 0 5px 15px rgba(0, 255, 136, 0.2);
+  }
+  
+  .repoInfo {
+    flex: 1;
+  }
+  
+  .repoName {
+    font-family: var(--main-font);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--main-color);
+    margin-bottom: 0.3rem;
+  }
+  
+  .repoDescription {
+    font-family: var(--second-font);
+    font-size: 0.85rem;
+    color: var(--main-color);
+    opacity: 0.7;
+    margin-bottom: 0.5rem;
+  }
+  
+  .repoMeta {
+    display: flex;
+    gap: 1rem;
+    font-family: var(--second-font);
+    font-size: 0.8rem;
+  }
+  
+  .repoLanguage {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: var(--main-color);
+    opacity: 0.6;
+  }
+  
+  .languageDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+  
+  .repoStars, .repoForks {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    color: var(--main-color);
+    opacity: 0.6;
+  }
+  
+  .repoArrow {
+    color: var(--highlight);
+    font-size: 1.2rem;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+  }
+  
+  .repoItem:hover .repoArrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  /* Contributions Tab */
+  .contributionsSummary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .summaryCard {
+    background: var(--c3);
+    border-radius: 20px;
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+  }
+  
+  .summaryCard:hover {
+    transform: translateY(-5px);
+    border-color: var(--highlight);
+  }
+  
+  .summaryValue {
+    display: block;
+    font-family: var(--main-font);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--highlight);
+    margin-bottom: 0.5rem;
+  }
+  
+  .summaryLabel {
+    font-family: var(--second-font);
+    font-size: 0.9rem;
+    color: var(--main-color);
+    opacity: 0.7;
+  }
+  
+  /* Calendar Card */
+  .calendarCard {
+    background: var(--c3);
+    border-radius: 20px;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+  }
+  
+  .calendarTitle {
+    font-family: var(--main-font);
+    font-size: 1.2rem;
+    color: var(--main-color);
+    margin-bottom: 1.5rem;
+  }
+  
+  .calendarGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .calendarRow {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .dayLabel {
+    width: 30px;
+    font-family: var(--second-font);
+    font-size: 0.7rem;
+    color: var(--main-color);
+    opacity: 0.5;
+  }
+  
+  .calendarCells {
+    display: flex;
+    gap: 3px;
+    flex: 1;
+  }
+  
+  .calendarCell {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    transition: transform 0.2s ease;
+  }
+  
+  .calendarCell:hover {
+    transform: scale(1.5);
+  }
+  
+  /* Languages Tab */
+  .languagesCard {
+    background: var(--c3);
+    border-radius: 20px;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+  }
+  
+  .languagesTitle {
+    font-family: var(--main-font);
+    font-size: 1.2rem;
+    color: var(--main-color);
+    margin-bottom: 1.5rem;
+  }
+  
+  .languagesList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .languageItem {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .languageHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .languageName {
+    font-family: var(--main-font);
+    font-size: 0.95rem;
+    color: var(--main-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .languageCount {
+    font-family: var(--second-font);
+    font-size: 0.85rem;
+    color: var(--main-color);
+    opacity: 0.6;
+  }
+  
+  .languageBar {
+    width: 100%;
+    height: 8px;
+    background: var(--c2)
+
+  }
+
+
+  /* Add to GitHubStats.module.css */
+
+.noData {
+    padding: 3rem;
+    text-align: center;
+    font-family: var(--second-font);
+    color: var(--main-color);
+    opacity: 0.6;
+    background: var(--c2);
+    border-radius: 15px;
+  }
+  
+  .graphCard {
+    background: var(--c3);
+    border-radius: 20px;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+  }
+  
+  .graphCard:hover {
+    border-color: var(--highlight);
+    box-shadow: 0 10px 30px -10px rgba(0, 255, 136, 0.2);
+  }
+  
+  .graphHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .graphTitle {
+    font-family: var(--main-font);
+    font-size: 1.2rem;
+    color: var(--main-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .graphTitle svg {
+    color: var(--highlight);
+  }
+  
+  .graphLegend {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--second-font);
+    font-size: 0.8rem;
+    color: var(--main-color);
+    opacity: 0.7;
+  }
+  
+  .legendColors {
+    display: flex;
+    gap: 2px;
+  }
+  
+  .legendColor {
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    transition: transform 0.2s ease;
+  }
+  
+  .legendColor:hover {
+    transform: scale(1.1);
+  }
+  
+  .contributionGraph {
+    overflow-x: auto;
+    padding-bottom: 1rem;
+  }
+  
+  .graphMonths {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 0.5rem;
+    padding-left: 30px;
+  }
+  
+  .monthLabel {
+    font-family: var(--second-font);
+    font-size: 0.8rem;
+    color: var(--main-color);
+    opacity: 0.6;
+  }
+  
+  .graphGrid {
+    display: flex;
+    gap: 3px;
+    min-width: min-content;
+  }
+  
+  .weekColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  
+  .commitCell {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  
+  .commitCell:hover {
+    transform: scale(1.5);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+  }
+  
+  /* Mobile responsiveness */
+  @media screen and (max-width: 768px) {
+    .graphHeader {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .commitCell {
+      width: 10px;
+      height: 10px;
+    }
+    
+    .graphMonths {
+      padding-left: 20px;
+    }
+    
+    .monthLabel {
+      font-size: 0.7rem;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .commitCell {
+      width: 8px;
+      height: 8px;
+    }
+  }
+
+
+  /* Add to GitHubStats.module.css */
+
+/* ===== DISTRIBUTION CARD STYLES ===== */
+.distributionCard {
+    background: var(--c3);
+    border-radius: 20px;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    margin-top: 1.5rem;
+  }
+  
+  .distributionCard:hover {
+    border-color: var(--highlight);
+    box-shadow: 0 15px 40px -15px rgba(0, 255, 136, 0.3);
+    transform: translateY(-5px);
+  }
+  
+  .distributionTitle {
+    font-family: var(--main-font);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--main-color);
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .distributionTitle::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--highlight);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+  
+  .distributionCard:hover .distributionTitle::after {
+    width: 100%;
+  }
+  
+  /* Distribution Chart Bar */
+  .distributionChart {
+    display: flex;
+    height: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    background: var(--c2);
+    border: 1px solid var(--border-color);
+  }
+  
+  .distributionSegment {
+    height: 100%;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .distributionSegment:hover {
+    transform: scaleY(1.1);
+    box-shadow: 0 0 15px currentColor;
+    z-index: 5;
+  }
+  
+  /* Distribution Legend */
+  .distributionLegend {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+  
+  .legendItem {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: var(--c2);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+  }
+  
+  .legendItem:hover {
+    transform: translateX(5px);
+    border-color: var(--highlight);
+    background: var(--c3);
+  }
+  
+  .legendColor {
+    width: 12px;
+    height: 12px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+  
+  .legendItem:hover .legendColor {
+    transform: scale(1.2);
+    border-radius: 50%;
+  }
+  
+  .legendName {
+    font-family: var(--second-font);
+    font-size: 0.9rem;
+    color: var(--main-color);
+    flex: 1;
+  }
+  
+  .legendPercent {
+    font-family: var(--main-font);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--highlight);
+    background: var(--c3);
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+  }
+  
+  /* ===== VIEW ALL BUTTON STYLES ===== */
+  .viewAllButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-top: 2.5rem;
+    padding: 1rem 2.5rem;
+    background: transparent;
+    border: 2px solid var(--highlight);
+    border-radius: 50px;
+    color: var(--main-color);
+    font-family: var(--main-font);
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    cursor: pointer;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+
+    @media (max-width: 576px) {
+        font-size: 0.5rem;
+      }
+  }
+  
+  .viewAllButton::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: var(--highlight);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+    z-index: -1;
+    opacity: 0.2;
+  }
+  
+  .viewAllButton:hover {
+    color: var(--c1);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 255, 136, 0.3);
+    border-color: var(--highlight);
+  }
+  
+  .viewAllButton:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .buttonArrow {
+    transition: transform 0.3s ease;
+  }
+  
+  .viewAllButton:hover .buttonArrow {
+    transform: translateX(8px);
+  }
+  
+  /* ===== ADDITIONAL STYLES FOR LANGUAGES TAB ===== */
+  .languagesTab {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .languagesCard {
+    background: var(--c3);
+    border-radius: 20px;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  .languagesCard:hover {
+    border-color: var(--highlight);
+    box-shadow: 0 15px 40px -15px rgba(0, 255, 136, 0.3);
+    transform: translateY(-5px);
+  }
+  
+  .languagesTitle {
+    font-family: var(--main-font);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--main-color);
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .languagesTitle::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--highlight);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+  
+  .languagesCard:hover .languagesTitle::after {
+    width: 100%;
+  }
+  
+  .languagesList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .languageItem {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.8rem;
+    background: var(--c2);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+  }
+  
+  .languageItem:hover {
+    transform: translateX(5px);
+    border-color: var(--highlight);
+    background: var(--c3);
+  }
+  
+  .languageHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .languageName {
+    font-family: var(--main-font);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--main-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .languageDot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+  
+  .languageItem:hover .languageDot {
+    transform: scale(1.2);
+    box-shadow: 0 0 10px currentColor;
+  }
+  
+  .languageCount {
+    font-family: var(--second-font);
+    font-size: 0.85rem;
+    color: var(--main-color);
+    opacity: 0.7;
+    background: var(--c3);
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+  }
+  
+  .languageBar {
+    width: 100%;
+    height: 8px;
+    background: var(--c2);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+  }
+  
+  .languageProgress {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+  
+  .languageProgress::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    animation: shimmer 2s infinite;
+  }
+  
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  
+  /* ===== RESPONSIVE STYLES ===== */
+  @media screen and (max-width: 768px) {
+    .distributionLegend {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8rem;
+    }
+  
+    .legendItem {
+      padding: 0.4rem;
+    }
+  
+    .legendName {
+      font-size: 0.8rem;
+    }
+  
+    .legendPercent {
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+    }
+  
+    .viewAllButton {
+      padding: 0.8rem 2rem;
+      font-size: 0.9rem;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .distributionLegend {
+      grid-template-columns: 1fr;
+    }
+  
+    .distributionChart {
+      height: 25px;
+    }
+  
+    .languageHeader {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.3rem;
+    }
+  
+    .languageCount {
+      align-self: flex-start;
+    }
+  
+    .viewAllButton {
+      /* width: 100%; */
+      padding: 0.8rem 1.5rem;
+    }
+  }
+  
+  /* ===== DARK THEME ADJUSTMENTS ===== */
+  body.dark .legendItem,
+  body.dark .languageItem {
+    background: rgba(21, 21, 21, 0.9);
+  }
+  
+  body.dark .distributionChart,
+  body.dark .languageBar {
+    background: rgba(0, 0, 0, 0.3);
+  }
+  
+  /* ===== ANIMATIONS ===== */
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .languageItem {
+    animation: slideIn 0.5s ease forwards;
+    opacity: 0;
+  }
+  
+  .languageItem:nth-child(1) { animation-delay: 0.1s; }
+  .languageItem:nth-child(2) { animation-delay: 0.2s; }
+  .languageItem:nth-child(3) { animation-delay: 0.3s; }
+  .languageItem:nth-child(4) { animation-delay: 0.4s; }
+  .languageItem:nth-child(5) { animation-delay: 0.5s; }
+
+
+  /* Add/Update these styles */
+
+/* 1. Turn the wrapper into a Grid container to lock widths together */
+.graphWrapper {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    
+    display: grid;
+    /* Col 1: 60px for labels, Col 2: expands to exactly fit the commit grid */
+    grid-template-columns: 60px max-content; 
+    column-gap: 0.5rem; /* Replaces the flex gap */
+    row-gap: 0.5rem;
+  }
+  
+  /* 2. "Remove" the row divs from the layout so their children become grid items */
+  .monthRow, .graphRow {
+    display: contents; 
+  }
+  
+  /* 3. Assign items to the grid */
+  .monthSpacer {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  
+  .monthsContainer {
+    grid-column: 2;
+    grid-row: 1;
+    position: relative;
+    height: 20px;
+    width: 100%; /* Now safely takes 100% of the newly locked max-content width */
+  }
+  
+  .dayColumn {
+    grid-column: 1;
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding-top: 0;
+  }
+  
+  .gridContainer {
+    grid-column: 2;
+    grid-row: 2;
+    display: flex;
+    gap: 3px;
+  }
+  
+  /* 4. Fine-tune alignments */
+  .monthTag {
+    position: absolute;
+    font-family: var(--second-font);
+    font-size: 0.75rem;
+    color: var(--main-color);
+    opacity: 0.8;
+    /* Changed from -50% to 0. GitHub aligns the text to the left edge of the column */
+    transform: translateX(0); 
+    white-space: nowrap;
+    font-weight: 500;
+
+    /* Optional: Adds a subtle line pointing to the exact column where the month starts */
+  border-left: 1px solid var(--border-color); 
+   padding-left: 4px;
+  }
+  
+  .monthTag:first-of-type {
+    font-weight: bold;
+    color: var(--highlight);
+  }
+  
+  .dayLabel {
+    height: 12px;
+    line-height: 12px; /* Added line-height to perfectly center text with 12px grid boxes */
+    font-family: var(--second-font);
+    font-size: 0.7rem;
+    color: var(--main-color);
+    opacity: 0.6;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+  }
+  
+  .dayLabel:nth-child(even) {
+    opacity: 0.4;
+  }
+  
+  /* Commit Cell Styles (Unchanged) */
+  .weekColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  
+  .commitCell {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  
+  .commitCell:hover {
+    transform: scale(1.5);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+  }
+  
+  .placeholderCell {
+    background: transparent;
+    border: 1px dashed var(--border-color);
+    cursor: default;
+  }
+  
+  .placeholderCell:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  
+  /* Footer styles (Unchanged) */
+  .graphFooter {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-family: var(--second-font);
+    font-size: 0.85rem;
+    color: var(--main-color);
+  }
+  
+  .dateRange {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0.8;
+    background: var(--c2);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+  }
+  
+  .dateRange span:first-child {
+    color: var(--highlight);
+    font-weight: 600;
+  }
+  
+  .totalStats {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0.7;
+    background: var(--c2);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+  }
+  
+  /* Mobile responsiveness - Updated to handle the new Grid columns */
+  @media screen and (max-width: 768px) {
+    .graphHeader {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .graphWrapper {
+      grid-template-columns: 45px max-content; /* Shrunk from 60px to 45px */
+    }
+    
+    .commitCell {
+      width: 10px;
+      height: 10px;
+    }
+    
+    .monthTag {
+      font-size: 0.65rem;
+    }
+    
+    .dayLabel {
+      font-size: 0.65rem;
+      height: 10px;
+      line-height: 10px;
+    }
+    
+    .graphFooter {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .dateRange, .totalStats {
+      justify-content: center;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .graphWrapper {
+      grid-template-columns: 40px max-content; /* Shrunk to 40px */
+    }
+  
+    .commitCell {
+      width: 8px;
+      height: 8px;
+    }
+    
+    .dayLabel {
+      font-size: 0.6rem;
+      height: 8px;
+      line-height: 8px;
+    }
+  }

@@ -5,6 +5,8 @@ import Contact from "./Contact";
 import Hero from "./Hero";
 import Project from "./Project";
 import { useEffect } from "react";
+import GitHubStats from "./components/GitHubStats/GitHubStats";
+import Experience from "./components/Experience/Experience";
 const App = () => {
   // pinging backend on initial load
   useEffect(() => {
@@ -24,6 +26,8 @@ const App = () => {
       <Navbar />
       <Hero />
       <Project />
+      <GitHubStats />
+      <Experience />
       <Contact />
       <Footer />
     </main>

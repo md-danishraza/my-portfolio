@@ -53,6 +53,16 @@ function Navbar() {
         <a href="#projects" className="navlinks" onClick={() => setMenu(false)}>
           PROJECTS
         </a>
+        <a href="#github" className="navlinks" onClick={() => setMenu(false)}>
+          STATS
+        </a>
+        <a
+          href="#experience"
+          className="navlinks"
+          onClick={() => setMenu(false)}
+        >
+          EXPERIENCE
+        </a>
         <a href="#contact" className="navlinks" onClick={() => setMenu(false)}>
           CONTACT
         </a>

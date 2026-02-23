@@ -161,7 +161,7 @@ function Footer() {
             </p>
           </div>
           <div className="footer-badges">
-            <span className="badge">v1.7</span>
+            <span className="badge">v1.8</span>
             <span className="badge">Portfolio</span>
           </div>
         </div>
