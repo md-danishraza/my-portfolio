@@ -1,9 +1,11 @@
+// Form.jsx
 import React from "react";
+import styles from "./Contact.module.css"; // Import the same CSS module
 
 function Form({ inputs, handleSubmit, handleChange, isLoading }) {
   return (
-    <form onSubmit={handleSubmit} className="contact-form">
-      <div className="form-group">
+    <form onSubmit={handleSubmit} className={styles["contact-form"]}>
+      <div className={styles["form-group"]}>
         <input
           type="text"
           name="name"
@@ -13,13 +15,13 @@ function Form({ inputs, handleSubmit, handleChange, isLoading }) {
           required
           placeholder=" "
         />
-        <label htmlFor="name" className="form-label">
+        <label htmlFor="name" className={styles["form-label"]}>
           Your Name
         </label>
-        <span className="focus-border"></span>
+        <span className={styles["focus-border"]}></span>
       </div>
 
-      <div className="form-group">
+      <div className={styles["form-group"]}>
         <input
           type="email"
           name="email"
@@ -29,13 +31,13 @@ function Form({ inputs, handleSubmit, handleChange, isLoading }) {
           required
           placeholder=" "
         />
-        <label htmlFor="email" className="form-label">
+        <label htmlFor="email" className={styles["form-label"]}>
           Email Address
         </label>
-        <span className="focus-border"></span>
+        <span className={styles["focus-border"]}></span>
       </div>
 
-      <div className="form-group">
+      <div className={styles["form-group"]}>
         <textarea
           name="message"
           id="message"
@@ -45,27 +47,27 @@ function Form({ inputs, handleSubmit, handleChange, isLoading }) {
           required
           placeholder=" "
         ></textarea>
-        <label htmlFor="message" className="form-label">
+        <label htmlFor="message" className={styles["form-label"]}>
           Your Message
         </label>
-        <span className="focus-border"></span>
+        <span className={styles["focus-border"]}></span>
       </div>
 
       <button
         type="submit"
-        className={`submit-btn ${isLoading ? "loading" : ""}`}
+        className={`${styles["submit-btn"]} ${isLoading ? styles.loading : ""}`}
         disabled={isLoading}
       >
         {isLoading ? (
           <>
-            <span className="spinner"></span>
+            <span className={styles.spinner}></span>
             <span>Sending...</span>
           </>
         ) : (
           <>
             <span>Send Message</span>
             <svg
-              className="send-icon"
+              className={styles["send-icon"]}
               viewBox="0 0 24 24"
               width="20"
               height="20"

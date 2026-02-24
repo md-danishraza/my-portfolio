@@ -152,6 +152,7 @@
   
   .detailLink:hover {
     color: var(--highlight);
+    cursor: pointer;
     opacity: 1;
     transform: translateY(-2px);
   }
@@ -166,6 +167,7 @@
   .statCard {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 1rem;
     padding: 1rem;
     background: var(--c2);

@@ -1,21 +1,22 @@
 import React, { useState } from "react";
-import js from "./assets/logos/js.png";
-import mongo from "./assets/logos/mongo.png";
-import express from "./assets/logos/express.png";
-import react from "./assets/logos/react.png";
-import node from "./assets/logos/node.png";
-import python from "./assets/logos/python.png";
-import git from "./assets/logos/git.png";
-import java from "./assets/logos/java.png";
-import postgres from "./assets/logos/postgres.png";
-import docker from "./assets/logos/docker.png";
-import kubernetes from "./assets/logos/kubernetes.png";
-import aws from "./assets/logos/aws.png";
+import js from "../../assets/logos/js.png";
+import mongo from "../../assets/logos/mongo.png";
+import express from "../../assets/logos/express.png";
+import react from "../../assets/logos/react.png";
+import node from "../../assets/logos/node.png";
+import python from "../../assets/logos/python.png";
+import git from "../../assets/logos/git.png";
+import java from "../../assets/logos/java.png";
+import postgres from "../../assets/logos/postgres.png";
+import docker from "../../assets/logos/docker.png";
+import kubernetes from "../../assets/logos/kubernetes.png";
+import aws from "../../assets/logos/aws.png";
 
 import { toast } from "react-toastify";
-import useScrollReveal from "./utils/useScrollReveal";
-import Form from "./components/Form";
+import useScrollReveal from "../../utils/useScrollReveal";
+import Form from "./Form";
 import axios from "axios";
+import styles from "./Contact.module.css";
 
 function Contact() {
   const [inputs, setInputs] = useState({ name: "", email: "", message: "" });
@@ -70,9 +71,9 @@ function Contact() {
     }
   };
 
-  useScrollReveal("#contactHeading", { origin: "top", delay: 200 });
-  useScrollReveal(".about-content", { origin: "left", delay: 200 });
-  useScrollReveal(".form-container", { origin: "right", delay: 300 });
+  useScrollReveal(`#contactHeading`, { origin: "top", delay: 200 });
+  useScrollReveal(`.${styles["about-column"]}`, { origin: "left", delay: 200 });
+  useScrollReveal(`.${styles["form-column"]}`, { origin: "right", delay: 300 });
 
   const skills = [
     { src: js, name: "JavaScript" },
@@ -90,29 +91,29 @@ function Contact() {
   ];
 
   return (
-    <div className="contact-section" id="contact">
-      <div className="contact-container">
-        <div className="section-header">
-          <h1 id="contactHeading" className="section-title">
-            Get In <span className="title-highlight">Touch</span>
+    <div className={styles["contact-section"]} id="contact">
+      <div className={styles["contact-container"]}>
+        <div className={styles["section-header"]}>
+          <h1 id="contactHeading" className={styles["section-title"]}>
+            Get In <span className={styles["title-highlight"]}>Touch</span>
           </h1>
-          <div className="title-decoration">
-            <span className="line"></span>
-            <span className="dot"></span>
-            <span className="line"></span>
+          <div className={styles["title-decoration"]}>
+            <span className={styles.line}></span>
+            <span className={styles.dot}></span>
+            <span className={styles.line}></span>
           </div>
         </div>
 
-        <div className="contact-content">
+        <div className={styles["contact-content"]}>
           {/* About Me Column */}
-          <div className="about-column">
-            <div className="about-card">
-              <div className="about-header">
-                <h2 className="about-name">MD Danish Raza</h2>
-                <p className="about-role">Full Stack Developer</p>
+          <div className={styles["about-column"]}>
+            <div className={styles["about-card"]}>
+              <div className={styles["about-header"]}>
+                <h2 className={styles["about-name"]}>MD Danish Raza</h2>
+                <p className={styles["about-role"]}>Full Stack Developer</p>
               </div>
 
-              <div className="about-bio">
+              <div className={styles["about-bio"]}>
                 <p>
                   Ambitious full-stack JavaScript developer with a solid
                   background in web development, data analysis, and backend
@@ -121,8 +122,8 @@ function Contact() {
                 </p>
               </div>
 
-              <div className="contact-info">
-                <div className="info-item">
+              <div className={styles["contact-info"]}>
+                <div className={styles["info-item"]}>
                   <svg viewBox="0 0 24 24" width="20" height="20">
                     <path
                       d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
@@ -131,16 +132,8 @@ function Contact() {
                   </svg>
                   <span>md.danish0raza@gmail.com</span>
                 </div>
-                {/* <div className="info-item">
-                  <svg viewBox="0 0 24 24" width="20" height="20">
-                    <path
-                      d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                  <span>+91 123 456 7890</span>
-                </div> */}
-                <div className="info-item">
+
+                <div className={styles["info-item"]}>
                   <svg viewBox="0 0 24 24" width="20" height="20">
                     <path
                       d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
@@ -151,11 +144,15 @@ function Contact() {
                 </div>
               </div>
 
-              <div className="skills-section">
-                <h3 className="skills-title">Tech Stack</h3>
-                <div className="skills-grid">
+              <div className={styles["skills-section"]}>
+                <h3 className={styles["skills-title"]}>Tech Stack</h3>
+                <div className={styles["skills-grid"]}>
                   {skills.map((skill, index) => (
-                    <div key={index} className="skill-item" title={skill.name}>
+                    <div
+                      key={index}
+                      className={styles["skill-item"]}
+                      title={skill.name}
+                    >
                       <img src={skill.src} alt={skill.name} />
                     </div>
                   ))}
@@ -165,11 +162,13 @@ function Contact() {
           </div>
 
           {/* Form Column */}
-          <div className="form-column">
-            <div className="form-card">
-              <div className="form-header">
-                <h2 className="form-title">Send Message</h2>
-                <p className="form-subtitle">I'll get back to you soon</p>
+          <div className={styles["form-column"]}>
+            <div className={styles["form-card"]}>
+              <div className={styles["form-header"]}>
+                <h2 className={styles["form-title"]}>Send Message</h2>
+                <p className={styles["form-subtitle"]}>
+                  I'll get back to you soon
+                </p>
               </div>
 
               <Form

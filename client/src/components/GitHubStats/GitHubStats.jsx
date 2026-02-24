@@ -15,6 +15,7 @@ import { HiCode, HiOutlineOfficeBuilding } from "react-icons/hi";
 import { fetchGitHubData } from "./utils.js";
 import styles from "./GitHubStats.module.css";
 import ContributionGraph from "./ContributionGraph.jsx";
+import Loader from "../Loader/Loader.jsx";
 
 function GitHubStats() {
   const [data, setData] = useState({
@@ -67,13 +68,16 @@ function GitHubStats() {
     return num?.toString() || "0";
   };
 
-  if (!loading) {
+  if (loading) {
     return (
       <div className={styles.container}>
-        <div className={styles.loadingContainer}>
-          <div className={styles.loadingSpinner}></div>
-          <p className={styles.loadingText}>Fetching GitHub data...</p>
-        </div>
+        <Loader
+          type="pulse"
+          text="Fetching GitHub data..."
+          size="large"
+          color="#9be9a8"
+          fullScreen={false}
+        />
       </div>
     );
   }

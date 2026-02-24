@@ -1,9 +1,9 @@
 import axios from "axios";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import Contact from "./Contact";
-import Hero from "./Hero";
-import Project from "./Project";
+import Contact from "./components/Contact/Contact";
+import Hero from "./components/Hero/Hero";
+import Project from "./components/Projects/Project";
 import { useEffect } from "react";
 import GitHubStats from "./components/GitHubStats/GitHubStats";
 import Experience from "./components/Experience/Experience";

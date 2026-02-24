@@ -1,9 +1,9 @@
 import React from "react";
-import profile from "./assets/profile.jpg";
-
-import ProfileImage from "./components/ProfileImg";
+import profile from "../../assets/profile.jpg";
+import ProfileImage from "./ProfileImg";
 import { FaGithub, FaLinkedin, FaInstagram, FaArrowDown } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import styles from "./Hero.module.css";
 
 function Hero() {
   const socialLinks = [
@@ -30,59 +30,66 @@ function Hero() {
   ];
 
   return (
-    <section className="hero-section">
+    <section className={styles["hero-section"]}>
       {/* Background decoration */}
-      <div className="hero-bg-decoration">
-        <div className="decoration-circle circle-1"></div>
-        <div className="decoration-circle circle-2"></div>
-        <div className="decoration-circle circle-3"></div>
+      <div className={styles["hero-bg-decoration"]}>
+        <div
+          className={`${styles["decoration-circle"]} ${styles["circle-1"]}`}
+        ></div>
+        <div
+          className={`${styles["decoration-circle"]} ${styles["circle-2"]}`}
+        ></div>
+        <div
+          className={`${styles["decoration-circle"]} ${styles["circle-3"]}`}
+        ></div>
       </div>
 
-      <div className="hero-container">
-        <div className="hero-content">
+      <div className={styles["hero-container"]}>
+        <div className={styles["hero-content"]}>
           {/* Left Column - Info */}
-          <div className="info">
-            <div className="info-badge">
-              <span className="badge-text">
+          <div className={styles.info}>
+            <div className={styles["info-badge"]}>
+              <span className={styles["badge-text"]}>
                 Welcome to my portfolio
                 <br /> A showcase of creativity and craft
               </span>
-              <span className="badge-dot"></span>
+              <span className={styles["badge-dot"]}></span>
             </div>
 
-            <h1 className="hero-title">
-              <span className="title-greeting">Hi, I'm</span>
-              <span className="title-name">Md. Danish Raza</span>
-              <span className="title-role">
-                Software <span className="role-highlight">Developer</span>
+            <h1 className={styles["hero-title"]}>
+              <span className={styles["title-greeting"]}>Hi, I'm</span>
+              <span className={styles["title-name"]}>Md. Danish Raza</span>
+              <span className={styles["title-role"]}>
+                Software{" "}
+                <span className={styles["role-highlight"]}>Developer</span>
               </span>
             </h1>
 
-            <p className="hero-description">
+            <p className={styles["hero-description"]}>
               B.Voc. SDE at Ramanujan College, DU • Full Stack Developer •
               Tenacity to learn anything • JS/TS Enthusiast
             </p>
 
-            <div className="hero-stats">
-              <div className="stat-item">
-                <span className="stat-number">2+</span>
-                <span className="stat-label">Years Experience</span>
+            <div className={styles["hero-stats"]}>
+              <div className={styles["stat-item"]}>
+                <span className={styles["stat-number"]}>2+</span>
+                <span className={styles["stat-label"]}>Years Experience</span>
               </div>
-              <div className="stat-item">
-                <span className="stat-number">20+</span>
-                <span className="stat-label">Projects</span>
+              <div className={styles["stat-item"]}>
+                <span className={styles["stat-number"]}>20+</span>
+                <span className={styles["stat-label"]}>Projects</span>
               </div>
-              <div className="stat-item">
-                <span className="stat-number">10+</span>
-                <span className="stat-label">Technologies</span>
+              <div className={styles["stat-item"]}>
+                <span className={styles["stat-number"]}>10+</span>
+                <span className={styles["stat-label"]}>Technologies</span>
               </div>
             </div>
 
-            <div className="hero-cta">
-              <a href="#projects" className="cta-primary">
+            <div className={styles["hero-cta"]}>
+              <a href="#projects" className={styles["cta-primary"]}>
                 View My Work
                 <svg
-                  className="cta-arrow"
+                  className={styles["cta-arrow"]}
                   viewBox="0 0 24 24"
                   width="18"
                   height="18"
@@ -95,21 +102,21 @@ function Hero() {
                   />
                 </svg>
               </a>
-              <a href="#contact" className="cta-secondary">
+              <a href="#contact" className={styles["cta-secondary"]}>
                 Let's Talk
               </a>
             </div>
 
-            <div className="hero-social">
-              <span className="social-label">Connect with me:</span>
-              <div className="social-links">
+            <div className={styles["hero-social"]}>
+              <span className={styles["social-label"]}>Connect with me:</span>
+              <div className={styles["social-links"]}>
                 {socialLinks.map((link, index) => (
                   <a
                     key={index}
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="social-link"
+                    className={styles["social-link"]}
                     aria-label={link.label}
                   >
                     {link.icon}
@@ -120,16 +127,16 @@ function Hero() {
           </div>
 
           {/* Right Column - Image */}
-          <div className="image-wrapper">
-            <div className="image-container">
-              <div className="image-backdrop"></div>
-              <div className="image-frame">
+          <div className={styles["image-wrapper"]}>
+            <div className={styles["image-container"]}>
+              <div className={styles["image-backdrop"]}></div>
+              <div className={styles["image-frame"]}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="100%"
                   height="100%"
                   viewBox="-25 -25 250 250"
-                  className="profile-svg"
+                  className={styles["profile-svg"]}
                 >
                   <defs>
                     <pattern
@@ -178,13 +185,19 @@ function Hero() {
               </div>
 
               {/* Floating elements */}
-              <div className="floating-element element-1">
+              <div
+                className={`${styles["floating-element"]} ${styles["element-1"]}`}
+              >
                 <span>React</span>
               </div>
-              <div className="floating-element element-2">
+              <div
+                className={`${styles["floating-element"]} ${styles["element-2"]}`}
+              >
                 <span>Node.js</span>
               </div>
-              <div className="floating-element element-3">
+              <div
+                className={`${styles["floating-element"]} ${styles["element-3"]}`}
+              >
                 <span>JS/TS</span>
               </div>
             </div>
@@ -192,10 +205,10 @@ function Hero() {
         </div>
 
         {/* Scroll indicator */}
-        <div className="scroll-indicator">
-          <a href="#projects" className="scroll-link">
-            <span className="scroll-text">Scroll Down</span>
-            <FaArrowDown className="scroll-icon" />
+        <div className={styles["scroll-indicator"]}>
+          <a href="#projects" className={styles["scroll-link"]}>
+            <span className={styles["scroll-text"]}>Scroll Down</span>
+            <FaArrowDown className={styles["scroll-icon"]} />
           </a>
         </div>
       </div>
