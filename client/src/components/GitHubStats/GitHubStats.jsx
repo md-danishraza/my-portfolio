@@ -67,7 +67,7 @@ function GitHubStats() {
     return num?.toString() || "0";
   };
 
-  if (loading) {
+  if (!loading) {
     return (
       <div className={styles.container}>
         <div className={styles.loadingContainer}>
@@ -376,6 +376,8 @@ function GitHubStats() {
                   <ContributionGraph
                     weeks={data.contributionCalendar.weeks}
                     maxCount={data.contributionCalendar.maxCount}
+                    firstDate={data.contributionCalendar.firstDate}
+                    lastDate={data.contributionCalendar.lastDate}
                   />
                 </div>
               )}

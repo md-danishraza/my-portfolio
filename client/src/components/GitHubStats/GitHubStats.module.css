@@ -223,6 +223,7 @@
   .tabs {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 1rem;
     margin-bottom: 2rem;
   }
@@ -241,8 +242,8 @@
     position: relative;
     overflow: hidden;
     @media (max-width: 768px) {
-        font-size: 0.5rem;
-        padding: 0.4rem 1rem;
+        font-size: 0.8rem;
+        padding: 0.4rem .5rem;
       }
   }
   

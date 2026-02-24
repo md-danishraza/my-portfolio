@@ -43,6 +43,8 @@ function Footer() {
   const quickLinks = [
     { name: "Home", url: "#" },
     { name: "Projects", url: "#projects" },
+    { name: "Github", url: "#github" },
+    { name: "Experience", url: "#experience" },
     { name: "Contact", url: "#contact" },
   ];
 

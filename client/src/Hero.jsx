@@ -43,7 +43,10 @@ function Hero() {
           {/* Left Column - Info */}
           <div className="info">
             <div className="info-badge">
-              <span className="badge-text">Welcome to my portfolio</span>
+              <span className="badge-text">
+                Welcome to my portfolio
+                <br /> A showcase of creativity and craft
+              </span>
               <span className="badge-dot"></span>
             </div>
 

@@ -2756,6 +2756,10 @@ body.dark .skill-item {
 
   .footer-section {
     text-align: center;
+
+    &.links{
+      justify-content: center;
+    }
   }
 
   .footer-link {
