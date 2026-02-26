@@ -10,8 +10,10 @@ import {
   FaLink,
   FaTwitter,
   FaRegClock,
-} from "react-icons/fa";
-import { HiCode, HiOutlineOfficeBuilding } from "react-icons/hi";
+  HiCode,
+  HiOutlineOfficeBuilding,
+} from "../icons.jsx";
+
 import { fetchGitHubData } from "./utils.js";
 import styles from "./GitHubStats.module.css";
 import ContributionGraph from "./ContributionGraph.jsx";

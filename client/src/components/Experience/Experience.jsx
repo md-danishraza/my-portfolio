@@ -1,8 +1,8 @@
 // Experience.jsx
 import React, { useState } from "react";
 import { experiences, techColors } from "./Data.js";
-import { FaCalendar, FaMapMarkerAlt, FaBriefcase } from "react-icons/fa";
-import { HiCode, HiOutlineOfficeBuilding } from "react-icons/hi";
+import { FaCalendar, FaMapMarkerAlt, FaBriefcase } from "../icons.jsx";
+import { HiCode, HiOutlineOfficeBuilding } from "../icons.jsx";
 import { MdWork } from "react-icons/md";
 import useScrollReveal from "../../utils/useScrollReveal";
 import styles from "./Experience.module.css";

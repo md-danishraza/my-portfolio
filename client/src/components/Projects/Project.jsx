@@ -6,7 +6,7 @@ import { DataLoader } from "../Loader/Loader";
 import styles from "./Project.module.css";
 
 function Project() {
-  const { loading, projects } = useFetchProjects();
+  const { loading, projects, error } = useFetchProjects();
   const [visibleCount, setVisibleCount] = useState(6);
   const [activeFilter, setActiveFilter] = useState("All"); // Keep this for UI highlighting
 
@@ -81,6 +81,10 @@ function Project() {
     origin: "bottom",
     interval: 150,
   });
+
+  if (error) {
+    return <div className="error">Failed to load projects: {error}</div>;
+  }
 
   // Calculate the filtered projects based on current menu
   const filteredProjects = (projects || []).filter((project) => {

@@ -1,8 +1,14 @@
 import React from "react";
 import profile from "../../assets/profile.jpg";
 import ProfileImage from "./ProfileImg";
-import { FaGithub, FaLinkedin, FaInstagram, FaArrowDown } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
+import {
+  FaGithub,
+  FaLinkedin,
+  FaInstagram,
+  FaArrowDown,
+  MdEmail,
+} from "../icons";
+
 import styles from "./Hero.module.css";
 
 function Hero() {

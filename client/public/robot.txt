@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://md-danishraza.netlify.app/sitemap.xml
+Host: https://md-danishraza.netlify.app

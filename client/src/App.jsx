@@ -1,36 +1,33 @@
-import axios from "axios";
-import Footer from "./components/Footer";
+import { lazy, Suspense } from "react";
+import Loader from "./components/Loader/Loader";
+
+// 1. Standard imports for "above the fold" content (loads instantly)
 import Navbar from "./components/Navbar";
-import Contact from "./components/Contact/Contact";
 import Hero from "./components/Hero/Hero";
-import Project from "./components/Projects/Project";
-import { useEffect } from "react";
-import GitHubStats from "./components/GitHubStats/GitHubStats";
-import Experience from "./components/Experience/Experience";
+
+// 2. Lazy load "below the fold" components
+const Project = lazy(() => import("./components/Projects/Project"));
+const GitHubStats = lazy(() => import("./components/GitHubStats/GitHubStats"));
+const Experience = lazy(() => import("./components/Experience/Experience"));
+const Contact = lazy(() => import("./components/Contact/Contact"));
+const Footer = lazy(() => import("./components/Footer"));
+
 const App = () => {
-  // pinging backend on initial load
-  useEffect(() => {
-    const pingBackend = async () => {
-      const url = import.meta.env.VITE_FORM;
-      try {
-        await axios.get(url);
-        console.log("pinged backend");
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    pingBackend();
-  }, []);
   return (
     <main>
       <Navbar />
       <Hero />
-      <Project />
-      <GitHubStats />
-      <Experience />
-      <Contact />
-      <Footer />
+
+      {/* 3. Wrap lazy components in a Suspense boundary */}
+      <Suspense fallback={<Loader />}>
+        <Project />
+        <GitHubStats />
+        <Experience />
+        <Contact />
+        <Footer />
+      </Suspense>
     </main>
   );
 };
+
 export default App;

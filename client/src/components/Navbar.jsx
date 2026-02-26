@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { FaGithubSquare } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa";
-import { FaInstagramSquare } from "react-icons/fa";
-import { FaTimes, FaBars } from "react-icons/fa";
+import {
+  FaGithubSquare,
+  FaLinkedin,
+  FaInstagramSquare,
+  FaTimes,
+  FaBars,
+} from "./icons";
+
 import Theme from "./Theme";
 
 function Navbar() {

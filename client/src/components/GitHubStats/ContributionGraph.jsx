@@ -1,5 +1,5 @@
 import styles from "./GitHubStats.module.css";
-import { FaRegCalendarAlt } from "react-icons/fa";
+import { FaRegCalendarAlt } from "../icons";
 
 const ContributionGraph = ({ weeks, maxCount, firstDate, lastDate }) => {
   const getCommitColor = (count) => {

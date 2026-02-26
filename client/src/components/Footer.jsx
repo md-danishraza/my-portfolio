@@ -1,6 +1,6 @@
 import React from "react";
-import { FaGithub, FaLinkedin, FaInstagram, FaHeart } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
+import { FaGithub, FaLinkedin, FaInstagram, FaHeart, MdEmail } from "./icons";
+
 import useScrollReveal from "../utils/useScrollReveal";
 
 function Footer() {
@@ -163,7 +163,7 @@ function Footer() {
             </p>
           </div>
           <div className="footer-badges">
-            <span className="badge">v1.9</span>
+            <span className="badge">v2.0</span>
             <span className="badge">Portfolio</span>
           </div>
         </div>
