@@ -96,8 +96,11 @@
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
-  transition: all .5s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: width, height, transform, opacity;
+  transform-origin: center center; /* Ensure it grows outward from the exact middle */
+  
+  /* Only animate transform and opacity for smooth 60fps */
+  transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  will-change: transform, opacity;
 }
 
 /* Light theme overlay (when switching to light) */

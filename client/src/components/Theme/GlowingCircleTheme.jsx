@@ -1,11 +1,10 @@
 // src/components/GlowingCircleTheme/GlowingCircleTheme.jsx
 import React, { useRef, useState } from "react";
 import { IoSunny, IoMoon } from "react-icons/io5";
-import { useTheme } from "../DotGrid/AnimatedBackground"; // Import the theme hook
+import { useTheme } from "../DotGrid/AnimatedBackground";
 import styles from "./GlowingCircleTheme.module.css";
 
 function GlowingCircleTheme() {
-  // Use theme from the context provider
   const { isDark, setIsDark } = useTheme();
 
   const [isAnimating, setIsAnimating] = useState(false);
@@ -18,51 +17,50 @@ function GlowingCircleTheme() {
     const button = buttonRef.current;
     const rect = button.getBoundingClientRect();
 
-    // Calculate circle position
+    // Calculate exact center of the button
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
+
+    // Calculate the distance to the furthest corner of the screen
     const maxRadius = Math.hypot(
       Math.max(centerX, window.innerWidth - centerX),
       Math.max(centerY, window.innerHeight - centerY)
     );
 
-    // Set initial circle style (starting point)
+    const diameter = maxRadius * 2;
+
+    // Set initial style at full size, but scaled down to 0
     setCircleStyle({
-      left: centerX,
-      top: centerY,
-      width: "0px",
-      height: "0px",
+      left: `${centerX}px`,
+      top: `${centerY}px`,
+      width: `${diameter}px`,
+      height: `${diameter}px`,
       opacity: 1,
-      transform: "translate(-50%, -50%)",
+      transform: "translate(-50%, -50%) scale(0)",
     });
 
-    // Start animation
     setIsAnimating(true);
 
-    // Expand circle after a tiny delay (to trigger transition)
+    // Trigger the GPU-accelerated scale animation
     setTimeout(() => {
-      setCircleStyle({
-        left: centerX,
-        top: centerY,
-        width: `${maxRadius * 2}px`,
-        height: `${maxRadius * 2}px`,
-        opacity: 1,
-        transform: "translate(-50%, -50%)",
-      });
+      setCircleStyle((prev) => ({
+        ...prev,
+        transform: "translate(-50%, -50%) scale(1)",
+      }));
     }, 10);
 
-    // Toggle theme mid-animation using the context setter
+    // Toggle theme mid-animation when the screen is fully covered
     setTimeout(() => {
       setIsDark(!isDark);
     }, 250);
 
-    // End animation
+    // Fade out and clean up
     setTimeout(() => {
-      setCircleStyle({ opacity: 0 });
+      setCircleStyle((prev) => ({ ...prev, opacity: 0 }));
       setTimeout(() => {
         setIsAnimating(false);
         setCircleStyle({});
-      }, 100);
+      }, 300); // Wait for the opacity fade to finish
     }, 600);
   };
 
@@ -88,7 +86,6 @@ function GlowingCircleTheme() {
         </div>
       </button>
 
-      {/* Growing circle overlay - SIMPLE DIV APPROACH */}
       {isAnimating && (
         <div
           className={`${styles.growingCircle} ${
