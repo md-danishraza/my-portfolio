@@ -989,40 +989,6 @@ html {
 
 
 
-/* Theme toggle button */
-.theme-toggle {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 2px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.2s ease;
-}
 
-.theme-toggle:hover {
-  background-color: rgba(128, 128, 128, 0.1);
-}
 
-.theme-icon {
-  font-size: 1.5rem;
-  color: var(--main-color);
-  transition: transform 0.3s ease;
-  will-change: transform; /* Hint to browser */
-}
 
-.theme-toggle:hover .theme-icon {
-  transform: rotate(15deg);
-}
-
-/* Optional: Add spin animation on click */
-.theme-toggle:active .theme-icon {
-  animation: spin 0.5s ease;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}

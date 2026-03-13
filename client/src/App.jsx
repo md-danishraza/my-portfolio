@@ -16,13 +16,10 @@ const Footer = lazy(() => import("./components/Footer"));
 // 3. Theme imports
 import AnimatedBackground, {
   ThemeProvider,
-  useTheme,
 } from "./components/DotGrid/AnimatedBackground";
 
 // App content that uses theme
 const AppContent = () => {
-  const { isDark } = useTheme(); // Now this works because it's inside ThemeProvider
-
   return (
     <>
       <AnimatedBackground />

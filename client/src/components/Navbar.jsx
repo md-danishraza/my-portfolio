@@ -7,7 +7,8 @@ import {
   FaBars,
 } from "./icons";
 
-import Theme from "./Theme";
+import Theme from "./Theme/Theme";
+import GlowingCircleTheme from "./Theme/GlowingCircleTheme";
 
 function Navbar() {
   const [menu, setMenu] = useState(false);
@@ -73,7 +74,9 @@ function Navbar() {
       </div>
 
       <div className="menu-theme">
-        <Theme />
+        {/* <Theme /> */}
+        <GlowingCircleTheme />
+
         <button
           className="menu-toggle"
           onClick={() => setMenu(!menu)}

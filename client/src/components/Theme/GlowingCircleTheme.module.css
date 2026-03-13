@@ -1,0 +1,130 @@
+/* src/components/GlowingCircleTheme/GlowingCircleTheme.module.css */
+
+.themeToggle {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  transition: transform 0.2s ease;
+}
+
+.themeToggle:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.themeToggle:hover {
+  transform: scale(1.05);
+}
+
+/* Simple circle container */
+.glowingCircle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  border: 2px solid var(--border-color);
+}
+
+/* Light mode */
+.light .glowingCircle {
+  background: var(--c3);
+  border-color: var(--highlight);
+}
+
+/* Dark mode */
+.dark .glowingCircle {
+  background: var(--c2);
+  border-color: var(--highlight);
+}
+
+.circleInner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Icon styles */
+.icon {
+  font-size: 1.2rem;
+  color: var(--main-color);
+  transition: all 0.3s ease;
+}
+
+/* Light mode icon color */
+.light .icon {
+  color: #ff8c00; /* Warm orange for sun */
+}
+
+/* Dark mode icon color */
+.dark .icon {
+  color: #f0f3bd; /* Soft yellow for moon */
+}
+
+/* Hover effects */
+.themeToggle:hover .icon {
+  transform: rotate(15deg);
+}
+
+.light .themeToggle:hover .glowingCircle {
+  box-shadow: 0 0 15px rgba(255, 140, 0, 0.5);
+}
+
+.dark .themeToggle:hover .glowingCircle {
+  box-shadow: 0 0 15px rgba(240, 243, 189, 0.5);
+}
+
+/* Active state */
+.themeToggle:active .glowingCircle {
+  transform: scale(0.95);
+}
+
+/* Growing circle overlay */
+.growingCircle {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transition: all .5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: width, height, transform, opacity;
+}
+
+/* Light theme overlay (when switching to light) */
+.toLight {
+  background: var(--c1);
+  box-shadow: 0 0 50px var(--highlight);
+}
+
+/* Dark theme overlay (when switching to dark) */
+.toDark {
+  background: var(--c1);
+  box-shadow: 0 0 50px var(--highlight);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .themeToggle {
+    width: 36px;
+    height: 36px;
+  }
+
+  .glowingCircle {
+    width: 32px;
+    height: 32px;
+  }
+
+  .icon {
+    font-size: 1rem;
+  }
+}

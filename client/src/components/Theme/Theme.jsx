@@ -1,7 +1,7 @@
 // src/components/Theme.jsx - Updated
 import React from "react";
 import { IoInvertMode } from "react-icons/io5";
-import { useTheme } from "./DotGrid/AnimatedBackground";
+import { useTheme } from "../DotGrid/AnimatedBackground";
 
 function Theme() {
   const { isDark, setIsDark } = useTheme();
