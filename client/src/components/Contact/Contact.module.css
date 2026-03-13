@@ -4,8 +4,19 @@
     margin-top: 8rem;
     padding: 6rem 2rem;
     position: relative;
-    background: var(--c2);
+    /* background: var(--c2); */
     overflow: hidden;
+
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent base */
+  backdrop-filter: blur(1px);           /* Increase blur for frosted look */
+  -webkit-backdrop-filter: blur(1px);
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border glow */
+  
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),       /* Enhanced depth */
+    inset 0 1px 0 rgba(255, 255, 255, 0.2); /* Inner highlight */
+  color: #000;
+  transition: all 0.3s ease;
   }
   
   /* Background decoration */

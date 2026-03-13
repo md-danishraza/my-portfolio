@@ -121,77 +121,13 @@ body.dark {
   --highlight: greenyellow;
   --shadow: drop-shadow(2px 2px 2px white);
   color: #f0f3bd;
+  background-color: var(--c1);
 }
 
 
 
 
-/* slow drifting movement */
-@keyframes bg-move {
-  0% {
-    background-position: 
-      calc(var(--s)/2) calc(.5*var(--s)/tan(30deg)),
-      0 0;
-  }
-  100% {
-    background-position: 
-      calc(var(--s)/2 + 140px) calc(.5*var(--s)/tan(30deg) + 80px),
-      140px 80px;
-  }
-}
 
-/* Base styles for all devices */
-body {
-  --s: 140px;
-  background:
-    conic-gradient(from 75deg,var(--c1) 15deg ,var(--c2) 0 30deg ,#0000 0 180deg,
-                  var(--c2) 0 195deg,var(--c1) 0 210deg,#0000 0) 
-       calc(var(--s)/2) calc(.5*var(--s)/tan(30deg)),
-    conic-gradient(var(--c1) 30deg ,var(--c3) 0 75deg ,var(--c1) 0 90deg, var(--c2) 0 105deg,
-                   var(--c3) 0 150deg,var(--c2) 0 180deg,var(--c3) 0 210deg,var(--c1) 0 256deg,
-                   var(--c2) 0 270deg,var(--c1) 0 286deg,var(--c2) 0 331deg,var(--c3) 0);
-  background-size: var(--s) calc(var(--s)/tan(30deg));
-  background-attachment: fixed; /* Only works well on desktop */
-}
-
-/* Desktop - Full animations */
-@media (min-width: 1024px) {
-  body {
-    animation: bg-move 30s linear infinite, bg-hue 60s ease-in-out infinite;
-    background-attachment: fixed;
-  }
-}
-
-/* Tablet - Movement only, no hue */
-@media (min-width: 769px) and (max-width: 1023px) {
-  body {
-    animation: bg-move 40s linear infinite; /* Slower, no filter */
-    background-attachment: scroll; /* Better performance */
-  }
-}
-
-/* Mobile - Static or very simple */
-@media (max-width: 768px) {
-  body {
-    animation: none; /* No animations */
-    background-attachment: scroll; /* Critical for performance */
-    /* Optional: simplify background */
-    background-size: calc(var(--s) * 0.8) calc(var(--s) * 0.8 / tan(30deg));
-  }
-  
-  /* Disable all filters on mobile */
-  body, body * {
-    filter: none !important;
-  }
-}
-
-/* Ultra performance mode for low-end devices */
-@media (max-width: 768px) and (pointer: coarse) {
-  body {
-    /* Even simpler - solid color with subtle gradient */
-    background: linear-gradient(135deg, var(--c1), var(--c2));
-  }
-}
 
 
 
