@@ -1,37 +1,43 @@
+// Theme.jsx - Optimized version
 import React, { useState, useEffect } from "react";
 import { IoInvertMode } from "react-icons/io5";
 
 function Theme() {
   const [isDarkTheme, setDarkTheme] = useState(() => {
-    // initializing the state with local storage
-    // check local storage first
-    let initialTheme = localStorage.getItem("darkTheme");
-    if (initialTheme == "true") {
-      return true;
-    } else {
-      return false;
-    }
-  });
-  useEffect(() => {
-    // "dark-theme" class based on the current theme
-    if (isDarkTheme) {
-      document.body.classList.add("dark");
-    } else {
-      document.body.classList.remove("dark");
-    }
+    // Check local storage first
+    const savedTheme = localStorage.getItem("darkTheme");
+    // Also check system preference
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
 
-    // Saving the current theme to localStorage
+    // Use saved theme or system preference
+    return savedTheme ? savedTheme === "true" : prefersDark;
+  });
+
+  useEffect(() => {
+    // Use requestAnimationFrame to avoid jank
+    requestAnimationFrame(() => {
+      if (isDarkTheme) {
+        document.body.classList.add("dark");
+      } else {
+        document.body.classList.remove("dark");
+      }
+    });
+
+    // Save to localStorage
     localStorage.setItem("darkTheme", String(isDarkTheme));
   }, [isDarkTheme]);
 
   return (
-    <span
+    <button
       onClick={() => setDarkTheme(!isDarkTheme)}
-      className="toggle-icon"
-      title="theme"
+      className="theme-toggle"
+      aria-label="Toggle theme"
+      title="Toggle dark/light mode"
     >
-      {isDarkTheme ? <IoInvertMode /> : <IoInvertMode />}
-    </span>
+      <IoInvertMode className="theme-icon" />
+    </button>
   );
 }
 

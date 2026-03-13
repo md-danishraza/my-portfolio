@@ -152,7 +152,7 @@ function Footer() {
           <div className="copyright">
             <p>
               &copy; {currentYear}
-              <span className="copyright-highlight"> Md. Danish Raza</span>
+              {/* <span className="copyright-highlight"> Md. Danish Raza</span> */}
             </p>
           </div>
           <div className="made-with">

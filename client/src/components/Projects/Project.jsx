@@ -132,7 +132,7 @@ function Project() {
           <>
             <div className={styles["projects-grid"]}>
               {filteredProjects
-                .reverse()
+                // .reverse()
                 .slice(0, visibleCount)
                 .map((project, i) => (
                   <Item key={i} project={project.fields} index={i} />
