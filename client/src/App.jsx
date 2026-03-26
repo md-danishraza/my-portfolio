@@ -1,5 +1,3 @@
-import Loader from "./components/Loader/Loader";
-
 // Standard imports for "above the fold" content (loads instantly)
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero/Hero";
@@ -18,7 +16,7 @@ import AnimatedBackground, {
 // App content that uses theme
 const AppContent = () => {
   return (
-    <>
+    <main role="main">
       <AnimatedBackground />
       <Navbar />
       <Hero />
@@ -28,7 +26,7 @@ const AppContent = () => {
       <Experience />
       <Contact />
       <Footer />
-    </>
+    </main>
   );
 };
 

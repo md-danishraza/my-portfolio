@@ -1,5 +1,5 @@
 import React from "react";
-import profile from "../../assets/profile.jpg";
+
 import ProfileImage from "./ProfileImg";
 import {
   FaGithub,
@@ -151,7 +151,7 @@ function Hero() {
                       width="250"
                       height="250"
                     >
-                      <ProfileImage profile={profile} />
+                      <ProfileImage profile="/profile.jpg" />
                     </pattern>
 
                     {/* Gradient for glow effect */}
