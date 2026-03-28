@@ -1,78 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo, useState } from "react";
 import useFetchProjects from "../../hooks/useFetchProjects";
 import Item from "./Item";
 import useScrollReveal from "../../utils/useScrollReveal";
 import { DataLoader } from "../Loader/Loader";
 import styles from "./Project.module.css";
 
+// Static array outside the component so it isn't recreated on every render
+const MENUS = ["All", "Vanilla", "CssLib", "React", "Next", "FullStack"];
+
 function Project() {
   const { loading, projects, error } = useFetchProjects();
   const [visibleCount, setVisibleCount] = useState(6);
-  const [activeFilter, setActiveFilter] = useState("All"); // Keep this for UI highlighting
+  const [activeFilter, setActiveFilter] = useState("All");
 
-  const menus = [
-    { stack: "All", status: false },
-    { stack: "Vanilla", status: false },
-    { stack: "CssLib", status: false },
-    { stack: "React", status: false },
-    { stack: "Next", status: false },
-    { stack: "FullStack", status: false },
-  ];
-
-  const [menu, setMenu] = useState(menus);
-
-  useEffect(() => {
-    setMenu((prev) => {
-      const copy = [...prev];
-      copy[0].status = true;
-      return copy;
-    });
-  }, []);
-
-  const handleMenu = (menuItem) => {
-    setActiveFilter(menuItem.stack); // Now this is used!
-    setMenu(
-      menus.map((item) =>
-        item.stack === menuItem.stack
-          ? { ...item, status: true }
-          : { ...item, status: false }
-      )
-    );
-    setVisibleCount(6);
+  const handleMenu = (stack) => {
+    setActiveFilter(stack);
+    setVisibleCount(6); // Reset count when changing filters
   };
 
+  // 1. INSTANT State Update: Let the Item.jsx IntersectionObserver handle the staggered animation
   const handleLoadMore = () => {
-    const targetCount = visibleCount + 6;
-    const increment = 1;
-    const interval = 200;
-    let count = visibleCount;
-
-    const increase = () => {
-      if (count < targetCount) {
-        count += increment;
-        setVisibleCount(count);
-        setTimeout(increase, interval);
-      }
-    };
-
-    increase();
+    setVisibleCount((prev) => prev + 6);
   };
 
   const handleCollapse = () => {
-    const targetCount = 6;
-    const decrement = 1;
-    const interval = 200;
-    let count = visibleCount;
-
-    const collapse = () => {
-      if (count > targetCount) {
-        count -= decrement;
-        setVisibleCount(count);
-        setTimeout(collapse, interval);
-      }
-    };
-
-    collapse();
+    setVisibleCount(6);
   };
 
   useScrollReveal(`#projects > h1`, { origin: "top", delay: 200 });
@@ -82,18 +34,16 @@ function Project() {
     interval: 150,
   });
 
+  // 2. useMemo: Only recalculate this list when 'projects' data or 'activeFilter' actually changes
+  const filteredProjects = useMemo(() => {
+    if (!projects) return [];
+    if (activeFilter === "All") return projects;
+    return projects.filter((project) => project.fields.stack === activeFilter);
+  }, [projects, activeFilter]);
+
   if (error) {
     return <div className="error">Failed to load projects: {error}</div>;
   }
-
-  // Calculate the filtered projects based on current menu
-  const filteredProjects = (projects || []).filter((project) => {
-    const currentStack = menu.find((item) => item.status)?.stack;
-    if (currentStack === "All") {
-      return true;
-    }
-    return project.fields.stack === currentStack;
-  });
 
   return (
     <div className={styles["project-section"]} id="projects">
@@ -109,16 +59,16 @@ function Project() {
 
         <div className={styles["filter-wrapper"]}>
           <div className={styles.menus}>
-            {menu.map((menuItem, i) => (
+            {MENUS.map((stack) => (
               <button
-                key={i}
-                onClick={() => handleMenu(menuItem)}
+                key={stack}
+                onClick={() => handleMenu(stack)}
                 className={`${styles["filter-btn"]} ${
-                  menuItem.status ? styles.active : ""
+                  activeFilter === stack ? styles.active : ""
                 }`}
               >
-                {menuItem.stack}
-                {menuItem.status && (
+                {stack}
+                {activeFilter === stack && (
                   <span className={styles["active-indicator"]}></span>
                 )}
               </button>
@@ -131,15 +81,17 @@ function Project() {
         ) : (
           <>
             <div className={styles["projects-grid"]}>
-              {filteredProjects
-                // .reverse()
-                .slice(0, visibleCount)
-                .map((project, i) => (
-                  <Item key={i} project={project.fields} index={i} />
-                ))}
+              {filteredProjects.slice(0, visibleCount).map((project, i) => (
+                <Item
+                  // 3. CRITICAL FIX: Use a unique ID so React knows exactly which card is which
+                  key={project.sys?.id || project.fields.title || i}
+                  project={project.fields}
+                  index={i}
+                />
+              ))}
             </div>
 
-            {!loading && filteredProjects.length > 0 && (
+            {filteredProjects.length > 0 && (
               <div className={styles["pagination-wrapper"]}>
                 <div className={styles["pagination-buttons"]}>
                   {filteredProjects.length > visibleCount && (
