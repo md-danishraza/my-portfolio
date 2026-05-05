@@ -7,7 +7,6 @@ import {
   FaBars,
 } from "./icons";
 
-import Theme from "./Theme/Theme";
 import GlowingCircleTheme from "./Theme/GlowingCircleTheme";
 
 function Navbar() {
