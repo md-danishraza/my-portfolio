@@ -161,8 +161,8 @@
   /* ===== MOBILE NAVIGATION MENU ===== */
   .mobileNav {
     position: fixed;
-    top: 0;
-    right: -100%;
+    top: -15%;
+    right: -120%;
     width: 85%;
     max-width: 400px;
     height: 100vh;
@@ -178,7 +178,7 @@
   }
   
   .mobileNav.active {
-    right: 0;
+    right: -10%;
   }
   
   /* Mobile Nav Header */
