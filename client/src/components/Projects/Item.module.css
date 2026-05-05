@@ -1,0 +1,456 @@
+/* src/components/Projects/Item.module.css */
+
+/* ===== PROJECT CARD - MODERN DESIGN ===== */
+.projectCard {
+    position: relative;
+    background: linear-gradient(135deg, var(--c3) 0%, var(--c2) 100%);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+    will-change: transform, box-shadow;
+    backdrop-filter: blur(10px);
+  }
+  
+  .projectCard.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  
+  .projectCard.hide {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  
+  .projectCard:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.4);
+    border-color: var(--highlight);
+  }
+  
+  /* Card Glow Effect */
+  .cardGlow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+      circle at 50% 0%,
+      var(--highlight),
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  .projectCard:hover .cardGlow {
+    opacity: 0.15;
+  }
+  
+  /* ===== IMAGE WRAPPER ===== */
+  .cardImageWrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--c2) 0%, var(--c3) 100%);
+  }
+  
+  /* Project Image */
+  .projectImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+  
+  .projectCard:hover .projectImage {
+    transform: scale(1.1);
+  }
+  
+  .projectImage.loading {
+    opacity: 0;
+  }
+  
+  .projectImage.loaded {
+    opacity: 1;
+    animation: imageReveal 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  @keyframes imageReveal {
+    0% {
+      opacity: 0;
+      transform: scale(1.1);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Image Gradient Overlay */
+  .imageGradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background: linear-gradient(to top, var(--c3), transparent);
+    z-index: 2;
+    pointer-events: none;
+  }
+  
+  /* Image Placeholder */
+  .imagePlaceholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: linear-gradient(
+      90deg,
+      var(--c2) 0%,
+      var(--c3) 25%,
+      var(--c2) 50%,
+      var(--c3) 75%,
+      var(--c2) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+  
+  @keyframes shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+  
+  /* ===== CARD BADGE ===== */
+  .cardBadge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 15;
+  }
+  
+  .stackTag {
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    color: var(--highlight);
+    padding: 0.35rem 1rem;
+    border-radius: 40px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  .projectCard:hover .stackTag {
+    background: var(--highlight);
+    color: var(--c1);
+    transform: scale(1.05);
+    border-color: transparent;
+  }
+  
+  /* ===== OVERLAY ===== */
+  .cardOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 0, 0, 0.85) 100%
+    );
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 20;
+  }
+  
+  .cardOverlay.active {
+    opacity: 1;
+  }
+  
+  .overlayContent {
+    text-align: center;
+    padding: 1.5rem;
+    transform: translateY(20px) scale(0.95);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .cardOverlay.active .overlayContent {
+    transform: translateY(0) scale(1);
+  }
+  
+  .overlayIcon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    animation: bounce 2s ease infinite;
+  }
+  
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+  
+  .overlayTitle {
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 1.2rem;
+    font-family: var(--main-font);
+    font-weight: 600;
+    background: linear-gradient(135deg, #fff, var(--highlight));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .overlayLinks {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .overlayLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .overlayLink.live {
+    background: linear-gradient(135deg, var(--highlight), var(--highlight-secondary));
+    color: white
+  }
+  
+  .overlayLink.code {
+    background: transparent;
+    color: white;
+    border: 1.5px solid var(--highlight);
+  }
+  
+  .overlayLink:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .overlayLink.live:hover {
+    background: transparent;
+    color: var(--highlight);
+  }
+  
+  .overlayLink.code:hover {
+    background: var(--highlight);
+    color: var(--c1);
+  }
+  
+  .overlayLink svg {
+    transition: transform 0.3s ease;
+  }
+  
+  .overlayLink:hover svg {
+    transform: translateX(3px);
+  }
+  
+  /* Overlay Close Button */
+  .overlayClose {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+  }
+  
+  .overlayClose:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+  }
+  
+  /* ===== CARD CONTENT ===== */
+  .cardContent {
+    padding: 1.2rem 1.5rem 1.5rem;
+    background: var(--c3);
+    position: relative;
+    z-index: 5;
+  }
+  
+  .cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+  
+  .cardTitle {
+    font-family: var(--main-font);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--main-color);
+    transition: all 0.3s ease;
+    line-height: 1.3;
+  }
+  
+  .projectCard:hover .cardTitle {
+    color: var(--highlight);
+  }
+  
+  .cardIcon {
+    color: var(--main-color);
+    opacity: 0.5;
+    transition: all 0.3s ease;
+  }
+  
+  .projectCard:hover .cardIcon {
+    opacity: 1;
+    color: var(--highlight);
+    transform: rotate(180deg);
+  }
+  
+  .cardDescription {
+    color: var(--main-color);
+    opacity: 0.7;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .cardFooter {
+    margin-top: 0.5rem;
+  }
+  
+  .readMore {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--highlight);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .readMore svg {
+    transition: transform 0.3s ease;
+  }
+  
+  .readMore:hover {
+    gap: 0.8rem;
+  }
+  
+  .readMore:hover svg {
+    transform: translateX(3px);
+  }
+  
+  /* ===== MOBILE TAP INDICATOR ===== */
+  .mobileTapIndicator {
+    margin-top: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    color: var(--highlight);
+    font-size: 0.7rem;
+    opacity: 0.7;
+  }
+  
+  /* ===== RESPONSIVE ===== */
+  @media screen and (max-width: 768px) {
+    .projectCard {
+      border-radius: 20px;
+    }
+  
+    .cardContent {
+      padding: 1rem 1.2rem 1.2rem;
+    }
+  
+    .cardTitle {
+      font-size: 1rem;
+    }
+  
+    .cardDescription {
+      font-size: 0.8rem;
+      -webkit-line-clamp: 2;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .projectCard {
+      transform: translateY(20px);
+    }
+  
+    .overlayLinks {
+      flex-direction: column;
+      width: 100%;
+    }
+  
+    .overlayLink {
+      justify-content: center;
+      width: 100%;
+    }
+  
+    .cardBadge {
+      top: 0.75rem;
+      right: 0.75rem;
+    }
+  
+    .stackTag {
+      font-size: 0.7rem;
+      padding: 0.25rem 0.75rem;
+    }
+  }
+  
+  /* ===== DARK MODE ADJUSTMENTS ===== */
+  body.dark .projectCard {
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+  }
+  
+  body.dark .cardContent {
+    background: #1a1a1a;
+  }
