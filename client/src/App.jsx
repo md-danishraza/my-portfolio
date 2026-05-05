@@ -1,5 +1,5 @@
 // Standard imports for "above the fold" content (loads instantly)
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Hero/Hero";
 
 import Projects from "./components/Projects/Project";
