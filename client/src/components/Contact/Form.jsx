@@ -1,6 +1,6 @@
-// Form.jsx
+// src/components/Contact/Form.jsx
 import React from "react";
-import styles from "./Contact.module.css"; // Import the same CSS module
+import styles from "./Contact.module.css";
 
 function Form({ inputs, handleSubmit, handleChange, isLoading }) {
   return (
@@ -46,7 +46,7 @@ function Form({ inputs, handleSubmit, handleChange, isLoading }) {
           onChange={handleChange}
           required
           placeholder=" "
-        ></textarea>
+        />
         <label htmlFor="message" className={styles["form-label"]}>
           Your Message
         </label>

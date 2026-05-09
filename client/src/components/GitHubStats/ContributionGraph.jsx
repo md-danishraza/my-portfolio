@@ -1,7 +1,12 @@
-import styles from "./GitHubStats.module.css";
-import { FaRegCalendarAlt } from "../icons";
+// src/components/GitHubStats/ContributionGraph.jsx
+import styles from "./ContributionGraph.module.css";
+import { FaRegCalendarAlt } from "react-icons/fa";
+import { useState } from "react";
 
-const ContributionGraph = ({ weeks, maxCount, firstDate, lastDate }) => {
+const ContributionGraph = ({ yearData }) => {
+  const { year, weeks, totalContributions, maxCount } = yearData;
+  const [tooltip, setTooltip] = useState(null);
+
   const getCommitColor = (count) => {
     if (count === 0) return "var(--c2)";
     const intensity = count / (maxCount || 1);
@@ -12,87 +17,95 @@ const ContributionGraph = ({ weeks, maxCount, firstDate, lastDate }) => {
     return "#0a4d1a";
   };
 
-  // 1. Fixed day labels to match GitHub's 0=Sunday data structure
   const dayLabels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-  // 2. Pre-process weeks to guarantee a 7-day structure so grid rows ALWAYS align
-  const processedWeeks = (weeks || []).map((week, index) => {
-    const isFirstWeek = index === 0;
-    const paddedWeek = Array(7).fill(null); // null represents a placeholder
+  if (!weeks || weeks.length === 0) {
+    return (
+      <div className={styles.graphCard}>
+        <div className={styles.noData}>
+          <p>No contribution data available for {year}</p>
+        </div>
+      </div>
+    );
+  }
 
-    if (isFirstWeek && week.length < 7) {
-      // If the first week is partial, the missing days are at the START (Sun, Mon...)
-      const startIndex = 7 - week.length;
-      week.forEach((count, i) => {
-        paddedWeek[startIndex + i] = count;
+  // Process weeks to ensure 7-day structure and store full day data
+  const processedWeeks = weeks.map((week, index) => {
+    const paddedWeek = Array(7).fill(null);
+    const isFirstWeek = index === 0;
+
+    if (isFirstWeek && week.contributionDays.length < 7) {
+      const startIndex = 7 - week.contributionDays.length;
+      week.contributionDays.forEach((day, i) => {
+        paddedWeek[startIndex + i] = day;
       });
     } else {
-      // For all other weeks (including the last partial week), missing days are at the END
-      week.forEach((count, i) => {
-        paddedWeek[i] = count;
+      week.contributionDays.forEach((day, i) => {
+        paddedWeek[i] = day;
       });
     }
     return paddedWeek;
   });
 
-  // Calculate total contributions
-  const totalContributions =
-    weeks?.flat().reduce((sum, count) => sum + (count || 0), 0) || 0;
-
-  // 3. Simplified month label generation perfectly aligned to the weeks
+  // Generate month labels - one per week column for perfect alignment
   const generateMonthLabels = () => {
-    if (!firstDate || !processedWeeks.length) return [];
+    if (!processedWeeks.length) return [];
 
-    const rawLabels = [];
+    const labels = [];
     let currentMonth = -1;
 
-    // 1. Gather all the month changes
-    processedWeeks.forEach((_, index) => {
-      const weekDate = new Date(firstDate);
-      weekDate.setDate(weekDate.getDate() + index * 7);
+    processedWeeks.forEach((week, index) => {
+      const firstDay = week.find((d) => d !== null);
+      if (!firstDay) return;
 
-      const month = weekDate.getMonth();
+      const date = new Date(firstDay.date);
+      const month = date.getMonth();
+      const monthName = date.toLocaleString("default", { month: "short" });
+
       if (month !== currentMonth) {
-        rawLabels.push({
-          name: weekDate.toLocaleString("default", { month: "short" }),
+        labels.push({
+          name: monthName,
           weekIndex: index,
         });
         currentMonth = month;
       }
     });
 
-    // 2. Filter out overlapping labels
-    return rawLabels.filter((label, i, arr) => {
-      if (i === 0 && arr.length > 1) {
-        // If the first month label is less than 3 weeks away from the second month label,
-        // hide it to prevent overlap.
-        return arr[1].weekIndex - label.weekIndex >= 3;
-      }
-      return true;
-    });
+    return labels;
   };
 
   const monthLabels = generateMonthLabels();
 
-  if (!weeks || weeks.length === 0) {
-    return (
-      <div className={styles.graphCard}>
-        <div className={styles.noData}>
-          <p>No contribution data available</p>
-        </div>
-      </div>
-    );
-  }
+  const handleCellEnter = (dayData, dayName, event) => {
+    if (!dayData) return;
+    const rect = event.target.getBoundingClientRect();
+    // CHANGE: Reference the graphCard instead of graphWrapper
+    const cardRect = event.target
+      .closest(`.${styles.graphCard}`)
+      ?.getBoundingClientRect();
+
+    setTooltip({
+      date: dayData.date,
+      day: dayName,
+      count: dayData.contributionCount,
+      x: rect.left - (cardRect?.left || 0) + rect.width / 2,
+      y: rect.top - (cardRect?.top || 0) - 10, // The -10 floats it slightly above the cell
+    });
+  };
+
+  const handleCellLeave = () => {
+    setTooltip(null);
+  };
 
   return (
     <div className={styles.graphCard}>
       <div className={styles.graphHeader}>
         <h4 className={styles.graphTitle}>
           <FaRegCalendarAlt />
-          {weeks.length} weeks of contributions
+          {year} Contributions
         </h4>
         <div className={styles.graphLegend}>
-          <span className={styles.legendLabel}>Less</span>
+          <span>Less</span>
           <div className={styles.legendColors}>
             <div
               className={styles.legendColor}
@@ -119,25 +132,24 @@ const ContributionGraph = ({ weeks, maxCount, firstDate, lastDate }) => {
               style={{ backgroundColor: "#0a4d1a" }}
             ></div>
           </div>
-          <span className={styles.legendLabel}>More</span>
+          <span>More</span>
         </div>
       </div>
 
-      <div className={styles.graphWrapper}>
-        {/* Month labels */}
-        <div
-          className={styles.monthRow}
-          style={{ position: "relative", height: "20px" }}
-        >
+      {/* CRITICAL: Passing the exact week count to CSS to prevent squishing */}
+      <div
+        className={styles.graphWrapper}
+        style={{ "--week-count": processedWeeks.length }}
+      >
+        <div className={styles.monthRow}>
           <div className={styles.monthSpacer}></div>
           <div className={styles.monthsContainer}>
-            {monthLabels.map((month, index) => (
+            {monthLabels.map((month, i) => (
               <div
-                key={index}
+                key={i}
                 className={styles.monthTag}
                 style={{
-                  position: "absolute",
-                  left: `${(month.weekIndex / processedWeeks.length) * 100}%`,
+                  gridColumn: month.weekIndex + 1,
                 }}
               >
                 {month.name}
@@ -146,9 +158,7 @@ const ContributionGraph = ({ weeks, maxCount, firstDate, lastDate }) => {
           </div>
         </div>
 
-        {/* Graph row with day labels */}
         <div className={styles.graphRow}>
-          {/* Day labels column */}
           <div className={styles.dayColumn}>
             {dayLabels.map((day) => (
               <div key={day} className={styles.dayLabel}>
@@ -157,12 +167,13 @@ const ContributionGraph = ({ weeks, maxCount, firstDate, lastDate }) => {
             ))}
           </div>
 
-          {/* Contribution grid mapping the newly padded weeks */}
           <div className={styles.gridContainer}>
             {processedWeeks.map((week, weekIndex) => (
               <div key={weekIndex} className={styles.weekColumn}>
-                {week.map((count, dayIndex) => {
-                  const isPlaceholder = count === null;
+                {week.map((dayData, dayIndex) => {
+                  const isPlaceholder = dayData === null;
+                  const count = isPlaceholder ? 0 : dayData.contributionCount;
+                  const dayName = dayLabels[dayIndex];
 
                   return (
                     <div
@@ -174,18 +185,12 @@ const ContributionGraph = ({ weeks, maxCount, firstDate, lastDate }) => {
                         backgroundColor: isPlaceholder
                           ? "transparent"
                           : getCommitColor(count),
-                        opacity: isPlaceholder ? 0.3 : 1,
                         border: isPlaceholder
                           ? "1px dashed var(--border-color)"
                           : "none",
                       }}
-                      title={
-                        isPlaceholder
-                          ? "No data"
-                          : `${count} contribution${
-                              count !== 1 ? "s" : ""
-                            } on ${dayLabels[dayIndex]}`
-                      }
+                      onMouseEnter={(e) => handleCellEnter(dayData, dayName, e)}
+                      onMouseLeave={handleCellLeave}
                     />
                   );
                 })}
@@ -195,31 +200,29 @@ const ContributionGraph = ({ weeks, maxCount, firstDate, lastDate }) => {
         </div>
       </div>
 
-      {/* Footer with stats */}
+      {tooltip && (
+        <div
+          className={styles.tooltip}
+          style={{ left: tooltip.x, top: tooltip.y }}
+        >
+          <div className={styles.tooltipDate}>
+            {new Date(tooltip.date).toLocaleDateString("default", {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </div>
+          <div className={styles.tooltipCount}>
+            <strong>{tooltip.count}</strong> contribution
+            {tooltip.count !== 1 ? "s" : ""}
+          </div>
+        </div>
+      )}
+
       <div className={styles.graphFooter}>
-        <div className={styles.dateRange}>
-          <span>
-            📅{" "}
-            {new Date(firstDate).toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-              year: "numeric",
-            })}
-          </span>
-          <span>→</span>
-          <span>
-            {new Date(lastDate).toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-              year: "numeric",
-            })}
-          </span>
-        </div>
-        <div className={styles.totalStats}>
-          <span>📊 Total: {totalContributions} contributions</span>
-          <span>•</span>
-          <span>🔥 Max: {maxCount} in a day</span>
-        </div>
+        <span>Total: {totalContributions.toLocaleString()} contributions</span>
+        <span>Peak: {maxCount} in a day</span>
       </div>
     </div>
   );

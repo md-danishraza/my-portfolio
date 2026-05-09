@@ -1,0 +1,203 @@
+/* src/components/GitHubStats/YearlyContributionGraph.module.css */
+.yearlyContainer {
+    width: 100%;
+  }
+  
+  .totalHeader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, var(--highlight)20, transparent);
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .totalIcon {
+    font-size: 2.5rem;
+  }
+  
+  .totalInfo {
+    flex: 1;
+  }
+  
+  .totalLabel {
+    display: block;
+    font-family: var(--second-font);
+    font-size: 0.8rem;
+    color: var(--main-color);
+    opacity: 0.7;
+    margin-bottom: 0.25rem;
+  }
+  
+  .totalValue {
+    display: block;
+    font-family: var(--main-font);
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--main-color), var(--highlight));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+  }
+  
+  .totalPeriod {
+    display: block;
+    font-family: var(--second-font);
+    font-size: 0.7rem;
+    color: var(--main-color);
+    opacity: 0.5;
+    margin-top: 0.25rem;
+  }
+  
+  .yearSelector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .yearNav {
+    background: var(--c3);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--main-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .yearNav:hover:not(:disabled) {
+    border-color: var(--highlight);
+    color: var(--highlight);
+    transform: scale(1.1);
+    background: var(--highlight);
+    color: var(--c1);
+  }
+  
+  .yearNav:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+  
+  .yearDisplay {
+    position: relative;
+  }
+  
+  .yearLabel {
+    font-family: var(--main-font);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--main-color);
+    padding: 0.5rem 1.5rem;
+    background: var(--c3);
+    border-radius: 40px;
+    border: 1px solid var(--border-color);
+    display: inline-block;
+  }
+  
+  .yearDecoration {
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 2px;
+    background: var(--highlight);
+    border-radius: 2px;
+  }
+  
+  .yearlySummary {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+  }
+  
+  .yearBadge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    background: var(--c3);
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .yearBadge:hover {
+    transform: translateY(-2px);
+    border-color: var(--highlight);
+  }
+  
+  .yearBadge.active {
+    background: var(--highlight);
+    border-color: var(--highlight);
+  }
+  
+  .badgeYear {
+    font-family: var(--main-font);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--main-color);
+  }
+  
+  .yearBadge.active .badgeYear {
+    color: var(--c1);
+  }
+  
+  .badgeCount {
+    font-family: var(--second-font);
+    font-size: 0.7rem;
+    color: var(--highlight);
+    background: var(--c2);
+    padding: 0.1rem 0.4rem;
+    border-radius: 20px;
+  }
+  
+  .yearBadge.active .badgeCount {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--c1);
+  }
+  
+  .noDataCard {
+    padding: 3rem;
+    text-align: center;
+    background: var(--c3);
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    color: var(--main-color);
+    opacity: 0.7;
+    font-family: var(--second-font);
+  }
+  
+  @media (max-width: 768px) {
+    .totalValue {
+      font-size: 1.5rem;
+    }
+    
+    .yearLabel {
+      font-size: 1.2rem;
+      padding: 0.4rem 1rem;
+    }
+    
+    .yearNav {
+      width: 32px;
+      height: 32px;
+    }
+    
+    .badgeCount {
+      display: none;
+    }
+  }

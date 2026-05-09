@@ -1,0 +1,240 @@
+/* ProfileCard.module.css */
+.profileCard {
+    position: relative;
+    background: linear-gradient(135deg, var(--c3) 0%, var(--c2) 100%);
+    border-radius: 32px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    margin-bottom: 2rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .profileCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.3);
+    border-color: var(--highlight);
+  }
+  
+  .cardGlow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 30% 20%, var(--highlight) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  
+  .profileCard:hover .cardGlow {
+    opacity: 0.1;
+  }
+  
+  .profileHeader {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .avatarWrapper {
+    position: relative;
+  }
+  
+  .avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.3s ease;
+  }
+  
+  .profileCard:hover .avatar {
+    transform: scale(1.05);
+  }
+  
+  .avatarRing {
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--highlight), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+  }
+  
+  .profileCard:hover .avatarRing {
+    opacity: 1;
+    animation: spin 3s linear infinite;
+  }
+  
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  .profileInfo {
+    flex: 1;
+  }
+  
+  .name {
+    font-family: var(--main-font);
+    font-size: 1.8rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--main-color), var(--highlight));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+  }
+  
+  .bio {
+    font-family: var(--second-font);
+    color: var(--main-color);
+    opacity: 0.8;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+  
+  .details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .detail, .detailLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--second-font);
+    font-size: 0.85rem;
+    color: var(--main-color);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+  }
+  
+  .detailLink {
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .detailLink:hover {
+    color: var(--highlight);
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+  
+  .statsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+  
+  .statCard {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+  
+  .statCard:hover {
+    transform: translateY(-5px);
+    border-color: var(--stat-color);
+    box-shadow: 0 10px 25px -10px var(--stat-color);
+  }
+  
+  .statIcon {
+    font-size: 1.8rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .statCard:hover .statIcon {
+    transform: scale(1.1);
+  }
+  
+  .statContent {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .statValue {
+    font-family: var(--main-font);
+    font-size: 1.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--main-color), var(--stat-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+  }
+  
+  .statLabel {
+    font-family: var(--second-font);
+    font-size: 0.75rem;
+    opacity: 0.7;
+  }
+  
+  .statGlow {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--stat-color), transparent);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+  
+  .statCard:hover .statGlow {
+    transform: scaleX(1);
+  }
+  
+  @media (max-width: 768px) {
+    .profileCard {
+      padding: 1.5rem;
+    }
+    
+    .profileHeader {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1rem;
+    }
+    
+    .details {
+      justify-content: center;
+    }
+    
+    .name {
+      font-size: 1.5rem;
+    }
+    
+    .statsGrid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .statsGrid {
+      grid-template-columns: 1fr;
+    }
+    
+    .statCard {
+      justify-content: center;
+    }
+  }

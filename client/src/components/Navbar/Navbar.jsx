@@ -165,7 +165,7 @@ function Navbar() {
           </a>
         </div>
         <div className={styles.mobileNavFooter}>
-          <p>© 2024 MD Danish Raza</p>
+          <p>© 2026 MD Danish Raza</p>
           <div className={styles.mobileSocial}>
             <a
               href="https://github.com/md-danishraza"

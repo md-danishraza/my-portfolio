@@ -1,0 +1,297 @@
+/* src/components/GitHubStats/ContributionGraph.module.css */
+.graphCard {
+    position: relative;
+    background: linear-gradient(135deg, var(--c3) 0%, var(--c2) 100%);
+    border-radius: 20px;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .graphCard:hover {
+    border-color: var(--highlight);
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .graphHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .graphTitle {
+    font-family: var(--main-font);
+    font-size: 1rem;
+    color: var(--main-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+  }
+  
+  .graphTitle svg {
+    color: var(--highlight);
+  }
+  
+  .graphLegend {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.7rem;
+    font-family: var(--second-font);
+    color: var(--main-color);
+    opacity: 0.7;
+  }
+  
+  .legendColors {
+    display: flex;
+    gap: 3px;
+  }
+  
+  .legendColor {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    transition: transform 0.2s ease;
+  }
+  
+  .legendColor:hover {
+    transform: scale(1.2);
+  }
+  
+  /* Graph Layout - Using CSS Grid for perfect alignment */
+.graphWrapper {
+    /* Centralize sizing variables */
+    --cell-size: 12px;
+    --cell-gap: 3px;
+    
+    width: 100%;
+    /* CRITICAL FIX: allow horizontal scroll, hide vertical */
+    overflow-x: auto; 
+    overflow-y: hidden; 
+    padding-bottom: 0.5rem;
+    position: relative;
+  }
+  
+  .monthRow, .graphRow {
+    display: grid;
+    /* Left column fixed, right column scales to content max */
+    grid-template-columns: 50px max-content; 
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .monthSpacer, .dayColumn {
+    width: 50px;
+    flex-shrink: 0;
+  }
+  
+  .dayColumn {
+    display: flex;
+    flex-direction: column;
+    gap: var(--cell-gap);
+  }
+  
+  .monthsContainer, .gridContainer {
+    display: grid;
+    /* Use explicit cell sizes, not 1fr, to force horizontal scrolling on small screens */
+    grid-template-columns: repeat(var(--week-count, 53), var(--cell-size));
+    gap: var(--cell-gap);
+    width: max-content; /* Force it to not squish */
+    position: relative;
+  }
+  
+  .monthsContainer {
+    height: 20px;
+  }
+  
+  .monthTag {
+    font-family: var(--second-font);
+    font-size: 0.75rem;
+    color: var(--main-color);
+    opacity: 0.7;
+    white-space: nowrap;
+    /* Align to the exact left edge of the column */
+    text-align: left; 
+  }
+  
+  .dayLabel {
+    height: var(--cell-size);
+    line-height: var(--cell-size);
+    font-family: var(--second-font);
+    font-size: 0.65rem;
+    color: var(--main-color);
+    opacity: 0.5;
+    display: flex;
+    align-items: center;
+  }
+  
+  .weekColumn {
+    display: flex;
+    flex-direction: column;
+    gap: var(--cell-gap);
+  }
+  
+  .commitCell {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border-radius: 3px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    will-change: transform; /* Optimized animation */
+    cursor: pointer;
+    box-sizing: border-box;
+  }
+  
+  .commitCell:hover {
+    transform: scale(1.5);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    position: relative;
+  }
+  
+  .placeholderCell {
+    background: transparent !important;
+    border: 1px dashed var(--border-color);
+    cursor: default;
+  }
+  
+  .placeholderCell:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  /* Tooltip/Modal */
+  .tooltip {
+    position: absolute;
+    background: var(--c3);
+    border: 1px solid var(--highlight);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    pointer-events: none;
+    transform: translate(-50%, -100%);
+    margin-top: -8px;
+    min-width: 180px;
+    text-align: center;
+    animation: tooltipFadeIn 0.15s ease;
+  }
+  
+  @keyframes tooltipFadeIn {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -90%);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -100%);
+    }
+  }
+  
+  .tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: var(--highlight);
+  }
+  
+  .tooltipDate {
+    font-family: var(--second-font);
+    font-size: 0.75rem;
+    color: var(--main-color);
+    opacity: 0.8;
+    margin-bottom: 0.25rem;
+  }
+  
+  .tooltipCount {
+    font-family: var(--main-font);
+    font-size: 0.85rem;
+    color: var(--main-color);
+  }
+  
+  .tooltipCount strong {
+    color: var(--highlight);
+    font-size: 1.1rem;
+  }
+  
+  .graphFooter {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    font-family: var(--second-font);
+    color: var(--main-color);
+    opacity: 0.6;
+  }
+  
+  .noData {
+    padding: 3rem;
+    text-align: center;
+    font-family: var(--second-font);
+    color: var(--main-color);
+    opacity: 0.6;
+  }
+  
+  /* Scrollbar */
+  .graphWrapper::-webkit-scrollbar {
+    height: 6px;
+  }
+  
+  .graphWrapper::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+  }
+  
+  .graphWrapper::-webkit-scrollbar-thumb {
+    background: var(--highlight);
+    border-radius: 10px;
+  }
+  
+  /* Responsive - Simply update the CSS variables */
+@media (max-width: 768px) {
+    .graphCard {
+      padding: 1rem;
+    }
+    .graphWrapper {
+      --cell-size: 10px; /* Slightly smaller cells */
+    }
+    .monthRow, .graphRow {
+      grid-template-columns: 40px max-content;
+    }
+    .monthSpacer, .dayColumn {
+      width: 40px;
+    }
+    .monthTag, .dayLabel {
+      font-size: 0.6rem;
+    }
+    .graphFooter {
+      flex-direction: column;
+      gap: 0.5rem;
+      text-align: center;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .graphWrapper {
+      --cell-size: 8px; /* Smallest cells */
+      --cell-gap: 2px;
+    }
+    .monthRow, .graphRow {
+      grid-template-columns: 35px max-content;
+    }
+    .monthSpacer, .dayColumn {
+      width: 35px;
+    }
+    .dayLabel {
+      font-size: 0.55rem;
+    }
+  }

@@ -1,3 +1,4 @@
+// src/components/Contact/Contact.jsx
 import React, { useState } from "react";
 import js from "../../assets/logos/js.png";
 import mongo from "../../assets/logos/mongo.png";
@@ -11,7 +12,6 @@ import postgres from "../../assets/logos/postgres.png";
 import docker from "../../assets/logos/docker.png";
 import kubernetes from "../../assets/logos/kubernetes.png";
 import aws from "../../assets/logos/aws.png";
-
 import { toast } from "react-toastify";
 import useScrollReveal from "../../utils/useScrollReveal";
 import Form from "./Form";
@@ -25,9 +25,7 @@ function Contact() {
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    setInputs((prev) => {
-      return { ...prev, [name]: value };
-    });
+    setInputs((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (event) => {
@@ -37,18 +35,15 @@ function Contact() {
 
     try {
       const response = await axios.post(url, inputs);
-
       if (response.data) {
         toast.success(response.data.message, {
           position: "top-center",
           autoClose: 3000,
         });
       }
-
       setInputs({ name: "", email: "", message: "" });
     } catch (error) {
       let errorMessage = "An unknown error occurred.";
-
       if (error.response) {
         if (error.response.data.errors) {
           errorMessage = error.response.data.errors
@@ -61,7 +56,6 @@ function Contact() {
         errorMessage =
           "Could not connect to the server. Please try again later.";
       }
-
       toast.error(errorMessage, {
         position: "top-center",
         autoClose: 3000,
@@ -105,14 +99,12 @@ function Contact() {
         </div>
 
         <div className={styles["contact-content"]}>
-          {/* About Me Column */}
           <div className={styles["about-column"]}>
             <div className={styles["about-card"]}>
               <div className={styles["about-header"]}>
                 <h2 className={styles["about-name"]}>MD Danish Raza</h2>
                 <p className={styles["about-role"]}>Full Stack Developer</p>
               </div>
-
               <div className={styles["about-bio"]}>
                 <p>
                   Ambitious full-stack JavaScript developer with a solid
@@ -121,7 +113,6 @@ function Contact() {
                   SDE at DU.
                 </p>
               </div>
-
               <div className={styles["contact-info"]}>
                 <div className={styles["info-item"]}>
                   <svg viewBox="0 0 24 24" width="20" height="20">
@@ -132,7 +123,6 @@ function Contact() {
                   </svg>
                   <span>md.danish0raza@gmail.com</span>
                 </div>
-
                 <div className={styles["info-item"]}>
                   <svg viewBox="0 0 24 24" width="20" height="20">
                     <path
@@ -143,7 +133,6 @@ function Contact() {
                   <span>Delhi, India</span>
                 </div>
               </div>
-
               <div className={styles["skills-section"]}>
                 <h3 className={styles["skills-title"]}>Tech Stack</h3>
                 <div className={styles["skills-grid"]}>
@@ -161,7 +150,6 @@ function Contact() {
             </div>
           </div>
 
-          {/* Form Column */}
           <div className={styles["form-column"]}>
             <div className={styles["form-card"]}>
               <div className={styles["form-header"]}>
@@ -170,7 +158,6 @@ function Contact() {
                   I'll get back to you soon
                 </p>
               </div>
-
               <Form
                 inputs={inputs}
                 handleSubmit={handleSubmit}
