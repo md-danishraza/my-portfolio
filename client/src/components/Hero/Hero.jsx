@@ -82,7 +82,7 @@ function Hero() {
                 <span className={styles["stat-label"]}>Years Experience</span>
               </div>
               <div className={styles["stat-item"]}>
-                <span className={styles["stat-number"]}>20+</span>
+                <span className={styles["stat-number"]}>30+</span>
                 <span className={styles["stat-label"]}>Projects</span>
               </div>
               <div className={styles["stat-item"]}>
