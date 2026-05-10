@@ -8,7 +8,7 @@ import {
   Environment,
   Html,
 } from "@react-three/drei";
-import styles from "./Avatar3D.module.css";
+import styles from "./Avatar3d.module.css";
 
 // Loading fallback component
 const LoaderFallback = () => (
