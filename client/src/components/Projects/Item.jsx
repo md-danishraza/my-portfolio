@@ -87,7 +87,8 @@ const Item = memo(({ project, index }) => {
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${styles.overlayLink} ${styles.live}`}
+                // className={`${styles.overlayLink} ${styles.live}`}
+                className={`${styles.overlayLink} ${styles.code}`}
                 onClick={(e) => e.stopPropagation()}
               >
                 <svg viewBox="0 0 24 24" width="16" height="16">
@@ -117,7 +118,8 @@ const Item = memo(({ project, index }) => {
                   href={project.code}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`${styles.overlayLink} ${styles.code}`}
+                  // className={`${styles.overlayLink} ${styles.code}`}
+                  className={`${styles.overlayLink} ${styles.live}`}
                   onClick={(e) => e.stopPropagation()}
                 >
                   <svg viewBox="0 0 24 24" width="16" height="16">

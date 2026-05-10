@@ -639,3 +639,160 @@
   body.dark .info-badge {
     background: rgba(21, 21, 21, 0.9);
   }
+
+
+
+  .view-toggle {
+    position: absolute;
+    top: -20px;
+    right: 20px;
+    z-index: 20;
+    display: flex;
+    gap: 0.5rem;
+    background: var(--c3);
+    backdrop-filter: blur(10px);
+    padding: 0.3rem;
+    border-radius: 50px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: none;
+    border-radius: 40px;
+    color: var(--main-color);
+    font-family: var(--second-font);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .toggle-btn svg {
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .toggle-btn:hover {
+    color: var(--highlight);
+  }
+  
+  .toggle-btn:hover svg {
+    transform: scale(1.1);
+  }
+  
+  .toggle-btn.active {
+    background: var(--highlight);
+    color: var(--c1);
+    box-shadow: 0 0 15px var(--highlight);
+  }
+  
+  .toggle-btn.active svg {
+    transform: scale(1.05);
+  }
+  
+  /* ===== VIEW CONTENT SWITCH ===== */
+  .view-content {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+  }
+  
+  .view-content.active {
+    display: block;
+    opacity: 1;
+    animation: fadeInScale 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Avatar wrapper for 3D */
+  .avatar-wrapper {
+    width: 100%;
+    min-width: 250px;
+    height: 450px;
+    position: relative;
+    z-index: 10;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .hero-section {
+      margin-top: 4rem;
+    }
+
+    .view-toggle {
+      top: -15px;
+      right: 10px;
+      padding: 0.2rem;
+    }
+    
+    .toggle-btn {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.75rem;
+    }
+    
+    .toggle-btn svg {
+      font-size: 0.9rem;
+    }
+    
+    .avatar-wrapper {
+      height: 380px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .view-toggle {
+      top: -10px;
+      right: 5px;
+    }
+    
+    .toggle-btn span {
+      display: none;
+    }
+    
+    .toggle-btn {
+      padding: 0.4rem;
+    }
+    
+    .toggle-btn svg {
+      font-size: 1rem;
+      margin: 0;
+    }
+    
+    .avatar-wrapper {
+      height: 320px;
+    }
+  }
+  
+  /* 3D specific adjustments */
+  .image-container {
+    position: relative;
+    width: 100%;
+    min-width: 250px;
+    max-width: 450px;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+  }
+
+  @media screen and (max-width: 480px) {
+
+    .image-container {
+      width: 250px;
+    }
+
+  }
+  
