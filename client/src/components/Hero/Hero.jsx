@@ -1,7 +1,7 @@
 // src/components/Hero/Hero.jsx
 import React, { useState } from "react";
 import ProfileImage from "./ProfileImg";
-import Avatar3D from "./Avatar3D";
+import Avatar3D from "./Avatar3d";
 import { MdEmail } from "../icons";
 import {
   FaCube,
