@@ -1,6 +1,22 @@
 export const experiences = [
   {
     id: 1,
+    title: "Web Development",
+    company: "Independent / Academic Portfolio",
+    location: "Self-directed",
+    startDate: "2024",
+    endDate: "Present",
+    type: "Personal Projects",
+    achievements: [
+      "Building production-grade applications using MERN stack, PERN stack and Next.js to solve complex problems in different domains",
+      "Applying industry-standard practices such as CI/CD, Versioning, Dockerization, and Agile development methodologies in a self-directed environment",
+    ],
+    technologies: ["MERN", "PERN", "Next.js", "Docker", "CI/CD", "Agile"],
+    icon: "🚀",
+    color: "#a80874",
+  },
+  {
+    id: 2,
     title: "Backend Developer Intern",
     company: "RemarkInfo Soft. Solution",
     location: "Remote",
@@ -16,40 +32,25 @@ export const experiences = [
     icon: "💻", // You can use emoji or custom icon
     color: "#00a896", // Optional: custom color for this experience
   },
+  
+
+  // 
   {
-    id: 2,
-    title: "Web Development",
-    company: "Independent / Academic Portfolio",
-    location: "Self-directed",
-    startDate: "2024",
+    id: 3,
+    title: "Data Research Intern",
+    company: "Info Edge (Naukri) India",
+    location: "India",
+    startDate: "Aug 2026",
     endDate: "Present",
-    type: "Personal Projects",
+    type: "Internship",
     achievements: [
-      "Building production-grade applications using MERN stack, PERN stack and Next.js to solve complex problems in different domains",
-      "Applying industry-standard practices such as CI/CD, Versioning, Dockerization, and Agile development methodologies in a self-directed environment",
+      "Engineered automated web scraping pipelines using Python/JavaScript, BeautifulSoup, Regex and Selenium to extract high-volume structured and unstructured data",
+      "Optimized operational workflows and leveraged AI tools to improve data processing efficiency, significantly reducing manual effort while maintaining data accuracy",
     ],
-    technologies: ["MERN", "PERN", "Next.js", "Docker", "CI/CD", "Agile"],
-    icon: "🚀",
-    color: "#a80874",
+    technologies: ["Python", "JavaScript", "BeautifulSoup", "Selenium", "Regex", "AI Tools","Automation"],
+    icon: "🔍",
+    color: "#ff6b6b",
   },
-  // Add more experiences here easily
-  // {
-  //   id: 3,
-  //   title: "Your New Role",
-  //   company: "Company Name",
-  //   location: "Location",
-  //   startDate: "Month Year",
-  //   endDate: "Month Year",
-  //   type: "Full-time / Internship",
-  //   achievements: [
-  //     "Achievement 1",
-  //     "Achievement 2",
-  //     "Achievement 3"
-  //   ],
-  //   technologies: ["Tech1", "Tech2", "Tech3"],
-  //   icon: "🌟",
-  //   color: "#ff6b6b"
-  // }
 ];
 
 // Export tech stack colors for consistent styling
@@ -69,5 +70,10 @@ export const techColors = {
   TypeScript: "#3178C6",
   React: "#61DAFB",
   MongoDB: "#47A248",
+  Python: "#3572A5",
+  BeautifulSoup: "#3776AB",
+  Selenium: "#43B02A",
+  Regex: "#B7178C",
+  "AI Tools": "#8E44AD",
   default: "#858585",
 };

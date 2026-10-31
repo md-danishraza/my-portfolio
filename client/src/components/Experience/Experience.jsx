@@ -9,7 +9,6 @@ import styles from "./Experience.module.css";
 
 function Experience() {
   const [expandedId, setExpandedId] = useState(null);
-  const [filter, setFilter] = useState("all");
 
   useScrollReveal(`.${styles.header}`, { origin: "top", delay: 200 });
   useScrollReveal(`.${styles.timelineItem}`, {
@@ -18,19 +17,8 @@ function Experience() {
     viewFactor: 0.1,
   });
 
-  // Filter experiences
-  const filteredExperiences =
-    filter === "all"
-      ? experiences
-      : experiences.filter((exp) =>
-          exp.type.toLowerCase().includes(filter.toLowerCase())
-        );
-
-  // Get unique experience types for filter
-  const experienceTypes = [
-    "all",
-    ...new Set(experiences.map((exp) => exp.type.toLowerCase())),
-  ];
+  // Reverse experiences so newest appears at the top
+  const orderedExperiences = [...experiences].reverse();
 
   const toggleExpand = (id) => {
     setExpandedId(expandedId === id ? null : id);
@@ -46,27 +34,12 @@ function Experience() {
             Professional{" "}
             <span className={styles.titleHighlight}>Experience</span>
           </h2>
-          <p className={styles.subtitle}>My journey in software development</p>
-
-          {/* Filter Buttons */}
-          <div className={styles.filterContainer}>
-            {experienceTypes.map((type) => (
-              <button
-                key={type}
-                className={`${styles.filterButton} ${
-                  filter === type ? styles.activeFilter : ""
-                }`}
-                onClick={() => setFilter(type)}
-              >
-                {type.charAt(0).toUpperCase() + type.slice(1)}
-              </button>
-            ))}
-          </div>
+          <p className={styles.subtitle}>My journey in software development engineering</p>
         </div>
 
         {/* Timeline */}
         <div className={styles.timeline}>
-          {filteredExperiences.map((exp, index) => (
+          {orderedExperiences.map((exp, index) => (
             <div
               key={exp.id}
               className={`${styles.timelineItem} ${
